@@ -8,7 +8,7 @@
   >
     <v-layer>
       <v-rect :config="configSelectionRectangle" ref="SelectionRectangle" />
-      <v-transformer ref="transformer" />
+      <v-transformer ref="transformer" :shouldOverdrawWholeArea="true" />
       <v-circle :config="configCircle"></v-circle>
       <v-rect :config="configRect"></v-rect>
       <v-rect :config="configRect2"></v-rect>
