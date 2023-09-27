@@ -4,15 +4,14 @@
     @mousedown="stage.touchStart"
     @mouseMove="stage.touchMove"
     @mouseUp="stage.touchEnd"
-    @touchStart="stage.touchStart"
-    @touchMove="stage.touchMove"
-    @touchEnd="stage.touchMove"
+    @click="stage.click"
   >
     <v-layer>
       <v-rect :config="configSelectionRectangle" ref="SelectionRectangle" />
       <v-transformer ref="transformer" />
       <v-circle :config="configCircle"></v-circle>
       <v-rect :config="configRect"></v-rect>
+      <v-rect :config="configRect2"></v-rect>
     </v-layer>
   </v-stage>
 </template>
@@ -42,6 +41,17 @@ const configRect = ref({
   name: 'rect',
   draggable: true,
 })
+
+const configRect2 = ref({
+  x: 250,
+  y: 100,
+  width: 150,
+  height: 90,
+  fill: 'green',
+  name: 'rect',
+  draggable: true,
+})
+
 
 const configSelectionRectangle = ref({
   x: 0,
@@ -127,7 +137,45 @@ const stage = {
     )
 
     const transformerNode = transformer.value?.getNode()
-    transformerNode.nodes(selected);
+    transformerNode.nodes(selected)
+  },
+  click(e: Konva.KonvaPointerEvent) {
+    console.log(e, '#1')
+    // if we are selecting with rect, do nothing
+    if (configSelectionRectangle.value.visible) return
+
+    const _stage = e.target.getStage()
+    const transformerNode = transformer.value?.getNode()
+
+    // if click on empty area - remove all selections
+    if (e.target === _stage) {
+      transformerNode.nodes([])
+      return;
+    }
+
+    // do nothing if clicked NOT on our rectangles
+    if (!e.target.hasName('rect')) return
+
+    // do we pressed shift or ctrl?
+    const metaPressed = e.evt.shiftKey || e.evt.ctrlKey || e.evt.metaKey;
+    const isSelected = transformerNode.nodes().indexOf(e.target) >= 0;
+
+    if (!metaPressed && !isSelected) {
+      // if no key pressed and the node is not selected
+      // select just one
+      transformerNode.nodes([e.target]);
+    } else if (metaPressed && isSelected) {
+      // if we pressed keys and node was selected
+      // we need to remove it from selection:
+      const nodes = transformerNode.nodes().slice(); // use slice to have new copy of array
+      // remove node from array
+      nodes.splice(nodes.indexOf(e.target), 1);
+      transformerNode.nodes(nodes);
+    } else if (metaPressed && !isSelected) {
+      // add the node into selection
+      const nodes = transformerNode.nodes().concat([e.target]);
+      transformerNode.nodes(nodes);
+    }
   }
 }
 </script>
