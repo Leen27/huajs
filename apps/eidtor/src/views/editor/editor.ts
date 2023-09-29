@@ -93,3 +93,5 @@ class Editor {
     this.invoker = new Invoker()
   }
 }
+
+export default Editor
