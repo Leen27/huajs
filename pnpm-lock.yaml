@@ -96,6 +96,9 @@ importers:
       huajs-core:
         specifier: workspace:*
         version: link:../../packages/huajs
+      huajs-utils:
+        specifier: workspace:*
+        version: link:../../packages/utils
 
   packages/huajs:
     dependencies:
@@ -105,6 +108,8 @@ importers:
       miniplex:
         specifier: ^2.0.0
         version: 2.0.0
+
+  packages/utils: {}
 
 packages:
 

@@ -1,21 +1,16 @@
-import { World } from 'miniplex'
 import Konva from 'konva'
 
-type Entity = {
-  position: { x: number; y: number; z: number }
-}
-
-type GraphConfig = {
+type HuaOptions = {
   id: string
 }
 
-class Graph {
+export class Hua {
   width: number
   height: number
   stage: Konva.Stage
 
-  constructor(config: GraphConfig) {
-    const { id } = config
+  constructor(options: HuaOptions) {
+    const { id } = options
     this.initGraph(id)
   }
 
@@ -28,9 +23,7 @@ class Graph {
       width: this.width,
       height: this.height
     })
-  
-    // const world = new World<Entity>()
-  
+    
     // const layer = new Konva.Layer()
     // stage.add(layer)
   
@@ -157,5 +150,3 @@ class Graph {
     // })
   }  
 }
-
-export default Graph

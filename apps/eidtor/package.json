@@ -15,7 +15,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "huajs-core": "workspace:*"
+    "huajs-core": "workspace:*",
+    "huajs-utils": "workspace:*"
   },
   "keywords": [],
   "author": "",

@@ -8,9 +8,9 @@
 </template>
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import GraphEngine from 'huajs-core'
+import huajs from 'huajs-core'
 onMounted(() => {
-  new GraphEngine({ id: 'container' })
+  const instance = new huajs({ id: 'container' })
 })
 
 const ui = {
