@@ -1,4 +1,6 @@
-import Hua from '../index'
+import { PosComponent } from '../components'
+import { Entity } from '../core/entity'
+import { Hua } from '../core/hua'
 
 /**
  * The Command interface declares a method for executing a command.
@@ -19,7 +21,8 @@ export class AddShapeCommand implements ICommand {
   }
 
   public execute() {
-    console.log(`SimpleCommand: See, I can do simple things like printing (${this.constructor.name})`)
+    const shape = new Entity()
+    shape.addComponent(new PosComponent())
     return Promise.resolve()
   }
 

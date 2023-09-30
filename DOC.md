@@ -22,3 +22,12 @@ UI 界面       画布
 
 
 UI <-> Editor <-> huajs
+
+
+Entity
+
+Shape
+大小组件
+位置组件
+
+圆   矩形
