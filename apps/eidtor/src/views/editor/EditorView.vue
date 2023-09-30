@@ -1,21 +1,22 @@
 <template>
   <div w-full bg-light>
     <div w-100 h-10 b-black b-1 bg-white absolute z-99>
-        <o-button @click="ui.addShape">+</o-button>
+        <o-button @click="addShape">+</o-button>
     </div>
     <div id="container"></div>
   </div>
 </template>
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import huajs from 'huajs-core'
+import Editor from '@/core/editor'
+
+let editor: Editor | undefined;
+
 onMounted(() => {
-  const instance = new huajs({ id: 'container' })
+  editor = new Editor('container')
 })
 
-const ui = {
-    addShape() {
-
-    }
+const addShape = () => {
+  editor?.command('AddShapeCommand')
 }
 </script>

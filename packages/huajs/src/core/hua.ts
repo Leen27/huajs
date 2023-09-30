@@ -11,14 +11,13 @@ export class Hua {
 
   constructor(options: HuaOptions) {
     const { id } = options
-    this.initGraph(id)
+    this.stage = this.initGraph(id)
+    this.width = window.innerWidth
+    this.height = window.innerHeight
   }
 
   initGraph = (id: string) => {
-    this.width = window.innerWidth
-    this.height = window.innerHeight
-  
-    this.stage = new Konva.Stage({
+    const stage = new Konva.Stage({
       container: id,
       width: this.width,
       height: this.height
@@ -148,5 +147,7 @@ export class Hua {
     //     tr.nodes(nodes)
     //   }
     // })
+
+    return stage
   }  
 }

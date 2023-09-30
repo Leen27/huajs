@@ -19,3 +19,6 @@ UI 界面       画布
 
 画布创建实体
 
+
+
+UI <-> Editor <-> huajs
