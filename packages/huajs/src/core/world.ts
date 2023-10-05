@@ -1,5 +1,5 @@
-import { World } from 'miniplex'
+import { World, Query } from 'miniplex'
 
 const world = new World()
 
-export { world }
+export { world, Query }

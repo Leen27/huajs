@@ -1,8 +1,6 @@
 import { type ICommandWithConsturctor } from './commands'
 import * as commandList from './commands'
 
-console.log(commandList, 'commandList')
-
 const commands: Record<string, ICommandWithConsturctor> = {}
 
 const register = (command: ICommandWithConsturctor) => {
@@ -19,7 +17,6 @@ const creater = (commandName: string, ...args: any) => {
 }
 
 for(const key in commandList) {
-    console.log(key, '#1')
     register((commandList as any)[key] as ICommandWithConsturctor)
 }
 

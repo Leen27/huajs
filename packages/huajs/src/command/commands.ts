@@ -1,5 +1,4 @@
-import { PosComponent } from '../components'
-import { Entity } from '../core/entity'
+import { world } from '../core/world'
 import { Hua } from '../core/hua'
 
 /**
@@ -14,15 +13,25 @@ export interface ICommandWithConsturctor {
   new(...args: any): ICommand
 }
 
+type CommandCtx = {
+  graphics: Hua
+}
+
 export class AddShapeCommand implements ICommand {
-  ctx: Hua
-  constructor(ctx: Hua) {
+  ctx: CommandCtx
+
+  constructor(ctx: CommandCtx) {
     this.ctx = ctx
   }
 
   public execute() {
-    const shape = new Entity()
-    shape.addComponent(new PosComponent())
+    world.add({
+      position: {
+        x: 100 + Math.random() * 100,
+        y: 100 + Math.random() * 100
+      }
+    })
+
     return Promise.resolve()
   }
 

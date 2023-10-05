@@ -1,4 +1,6 @@
 import Konva from 'konva'
+import { RenderSystem } from '../systems'
+import { world } from './world'
 
 type HuaOptions = {
   id: string
@@ -8,12 +10,20 @@ export class Hua {
   width: number
   height: number
   stage: Konva.Stage
+  layer: Konva.Layer
+  renderer: RenderSystem
 
   constructor(options: HuaOptions) {
     const { id } = options
-    this.stage = this.initGraph(id)
+
     this.width = window.innerWidth
     this.height = window.innerHeight
+
+    this.stage = this.initGraph(id)
+    this.layer = new Konva.Layer()
+    this.stage.add(this.layer)
+    
+    this.initSystem()
   }
 
   initGraph = (id: string) => {
@@ -22,10 +32,7 @@ export class Hua {
       width: this.width,
       height: this.height
     })
-    
-    // const layer = new Konva.Layer()
-    // stage.add(layer)
-  
+
     // const tr = new Konva.Transformer({
     //   shouldOverdrawWholeArea: true
     // })
@@ -150,4 +157,8 @@ export class Hua {
 
     return stage
   }  
+
+  initSystem() {
+    this.renderer = new RenderSystem(world, this)
+  }
 }

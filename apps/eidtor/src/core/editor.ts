@@ -114,7 +114,9 @@ class Editor {
   }
 
   command(commandName: string | ICommand, ...args: any) {
-    return this.invoker.execute(commandName, ...args)
+    return this.invoker.execute(commandName, {
+      graphics: this.graphics
+    }, ...args)
   }
 }
 
