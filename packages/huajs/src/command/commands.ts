@@ -1,5 +1,4 @@
-import { world } from '../core/world'
-import { Hua } from '../core/hua'
+import { Engine } from '../core/engine'
 
 /**
  * The Command interface declares a method for executing a command.
@@ -13,19 +12,16 @@ export interface ICommandWithConsturctor {
   new(...args: any): ICommand
 }
 
-type CommandCtx = {
-  graphics: Hua
-}
 
 export class AddShapeCommand implements ICommand {
-  ctx: CommandCtx
+  engine: Engine
 
-  constructor(ctx: CommandCtx) {
-    this.ctx = ctx
+  constructor(engine: Engine) {
+    this.engine = engine
   }
 
   public execute() {
-    world.add({
+    this.engine.world.add({
       position: {
         x: 100 + Math.random() * 100,
         y: 100 + Math.random() * 100

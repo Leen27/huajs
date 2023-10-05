@@ -1,35 +1,12 @@
 import Konva from 'konva'
-import { System } from '../core/system'
-import { Query } from '../core/world'
-import { Hua } from '../core/hua'
+import { World } from 'miniplex'
 
-export class RenderSystem extends System {
-  hua: Hua
+export function createRenderSystem(world: World) {
+  const engines = world.with('renderEngine')
+  const entities = world.with('position')
 
-  queries: Query<
-    {
-      position: {
-        x: number
-        y: number
-      }
-    }
-  >
-
-  init(hua: Hua) {
-    this.hua = hua
-    this.queries = this.world.with('position')
-
-    console.log(this.queries, hua, '#1')
-
-    this.update()
-
-    this.queries.onEntityAdded.subscribe((entity: any) => {
-      console.log(entity, '#1 added')
-      this.renderAdded(entity)
-    })
-  }
-
-  renderAdded(entity: any) {
+  entities.onEntityAdded.subscribe((entity: any) => {
+    console.log(entity, '#1 added')
     const rect1 = new Konva.Rect({
       x: entity.position.x,
       y: entity.position.y,
@@ -40,7 +17,10 @@ export class RenderSystem extends System {
       strokeWidth: 4,
       draggable: true
     }); // 将形状添加到图层
+    const [{ renderEngine }] = engines
+  console.log(renderEngine)
+    renderEngine.layer.add(rect1);
+  })
 
-    this.hua.layer.add(rect1);
-  }
+  return () => {}
 }

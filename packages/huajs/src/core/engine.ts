@@ -1,38 +1,50 @@
 import Konva from 'konva'
-import { RenderSystem } from '../systems'
-import { world } from './world'
+import { createRenderSystem } from '../systems'
+import { World, Query } from 'miniplex'
 
-type HuaOptions = {
-  id: string
+export type EntityData = {
+  renderEngine?: {
+    stage: Konva.Stage
+    layer: Konva.Layer
+  }
+
+  position?: {
+    x: number
+    y: number
+  }
 }
 
-export class Hua {
-  width: number
-  height: number
-  stage: Konva.Stage
-  layer: Konva.Layer
-  renderer: RenderSystem
+export type EngineOptions = {
+  id: string
+  layers: Array<{
+    items: EntityData[]
+  }>
+}
 
-  constructor(options: HuaOptions) {
-    const { id } = options
+export class Engine {
+  world: World
 
-    this.width = window.innerWidth
-    this.height = window.innerHeight
+  constructor(options: EngineOptions) {
+    const { id, layers } = options
 
-    this.stage = this.initGraph(id)
-    this.layer = new Konva.Layer()
-    this.stage.add(this.layer)
-    
+    const graph = this.initGraph(id)
+
+    this.world = this.initWorld(graph, layers)
+
     this.initSystem()
   }
 
-  initGraph = (id: string) => {
+  initGraph(id: string) {
     const stage = new Konva.Stage({
       container: id,
-      width: this.width,
-      height: this.height
+      width: 1500,
+      height: 1500
     })
 
+    const layer = new Konva.Layer()
+    
+    stage.add(layer)
+    
     // const tr = new Konva.Transformer({
     //   shouldOverdrawWholeArea: true
     // })
@@ -155,10 +167,37 @@ export class Hua {
     //   }
     // })
 
-    return stage
-  }  
+    return {
+      stage,
+      layer
+    }
+  }
+  
+  initWorld(graph: {
+    stage: Konva.Stage,
+    layer: Konva.Layer
+  }, layers: Array<{
+    items: EntityData[]
+  }>) {
+    const world = new World<EntityData>()
+
+    world.add({
+      renderEngine: {
+        stage: graph.stage,
+        layer: graph.layer
+      }
+    })
+    for(const layer of layers) {
+      for(const item of layer.items) {
+        world.add(item)
+      }
+    }
+    
+    return world
+  }
 
   initSystem() {
-    this.renderer = new RenderSystem(world, this)
+    const renderSystem = createRenderSystem(this.world)
+    renderSystem()
   }
 }
