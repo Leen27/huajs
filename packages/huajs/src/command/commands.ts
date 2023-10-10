@@ -15,24 +15,26 @@ export interface ICommandWithConsturctor {
 
 export class AddShapeCommand implements ICommand {
   engine: Engine
+  entity: any
+  data: object
 
-  constructor(engine: Engine) {
+  constructor(engine: Engine, data: Object) {
     this.engine = engine
+    this.data = data
   }
 
   public execute() {
-    this.engine.world.add({
-      position: {
-        x: 100 + Math.random() * 100,
-        y: 100 + Math.random() * 100
-      }
-    })
+    // this.entity = this.engine.world.add(this.data)
 
-    return Promise.resolve()
+    // console.log(this.entity)
+
+    return Promise.resolve(this.entity)
   }
 
   public undo() {
-    console.log(`SimpleCommand: See, I can do simple things like printing (${this.constructor.name})`)
+    // this.engine.world.remove(this.entity)
+    // this.entity = undefined
+    // console.log(`SimpleCommand: See, I can do simple things like printing (${this.constructor.name})`)
     return Promise.resolve()
   }
 }

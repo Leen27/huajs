@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "miniplex": "^2.0.0",
-    "konva": "^9.2.1"
+    "huajs-utils": "workspace:*"
   }
 }

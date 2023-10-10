@@ -1,11 +1,22 @@
 import Konva from 'konva'
 import { createRenderSystem } from '../systems'
 import { World, Query } from 'miniplex'
+import { createApp, type App } from 'vue';
+import GraphView from './GraphView.vue'
+import VueKonva from 'vue-konva';
+import { Invoker, type ICommand } from '../command';
+
 
 export type EntityData = {
   renderEngine?: {
     stage: Konva.Stage
     layer: Konva.Layer
+    zoom?: number
+  }
+
+  size?: {
+    width: number
+    height: number
   }
 
   position?: {
@@ -16,34 +27,61 @@ export type EntityData = {
 
 export type EngineOptions = {
   id: string
-  layers: Array<{
-    items: EntityData[]
-  }>
+  items: EntityData[]
 }
 
 export class Engine {
-  world: World
+  declare invoker: Invoker
+
+  constructor() {
+    this.invoker = new Invoker()
+  }
+
+  command(commandName: string | ICommand, ...args: any) {
+    return this.invoker.execute(commandName, this, ...args)
+  }
+
+  on(eventName: string, callback: (...args: any) => any ): void {
+    return
+  }
+}
+
+export class RenderEngine extends Engine {
+  // world: World
+  _vue_app: App
 
   constructor(options: EngineOptions) {
-    const { id, layers } = options
+    super()
 
-    const graph = this.initGraph(id)
+    const { id, items } = options
 
-    this.world = this.initWorld(graph, layers)
+    this._vue_app = this.initApp(id)
 
-    this.initSystem()
+    // this.world = this.initWorld({graph, items})
+
+    // this.initSystem()
+  }
+
+  initApp(id: string) {
+    const app = createApp(GraphView);
+    app.use(VueKonva);
+    app.mount(`#${id}`);
+
+    return app
   }
 
   initGraph(id: string) {
-    const stage = new Konva.Stage({
-      container: id,
-      width: 1500,
-      height: 1500
-    })
 
-    const layer = new Konva.Layer()
+
+    // const stage = new Konva.Stage({
+    //   container: id,
+    //   width: 1500,
+    //   height: 1500
+    // })
+
+    // const layer = new Konva.Layer()
     
-    stage.add(layer)
+    // stage.add(layer)
     
     // const tr = new Konva.Transformer({
     //   shouldOverdrawWholeArea: true
@@ -167,37 +205,34 @@ export class Engine {
     //   }
     // })
 
-    return {
-      stage,
-      layer
-    }
+    // return {
+    //   stage,
+    //   layer
+    // }
   }
   
-  initWorld(graph: {
+  initWorld({ graph, items}: {graph: {
     stage: Konva.Stage,
     layer: Konva.Layer
-  }, layers: Array<{
-    items: EntityData[]
-  }>) {
+  }, items: EntityData[]}) {
     const world = new World<EntityData>()
 
     world.add({
       renderEngine: {
         stage: graph.stage,
-        layer: graph.layer
+        layer: graph.layer,
+        zoom: 1
       }
     })
-    for(const layer of layers) {
-      for(const item of layer.items) {
-        world.add(item)
-      }
+    for(const item of items) {
+      world.add(item)
     }
     
     return world
   }
 
-  initSystem() {
-    const renderSystem = createRenderSystem(this.world)
-    renderSystem()
-  }
+  // initSystem() {
+  //   const renderSystem = createRenderSystem(this.world)
+  //   renderSystem()
+  // }
 }

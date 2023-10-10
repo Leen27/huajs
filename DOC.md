@@ -34,3 +34,7 @@ Shape
 
 
 saved data -> Editor() -> Hua -> RenderSystem
+
+data
+
+Store(Proxy(data)) | Editor(data) | Render Engine(data) 

@@ -6,23 +6,29 @@
           {{ items }}
         </div>
     </div>
-    <div id="container"></div>
+    <div w-full h-screen id="container"></div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, reactive } from 'vue'
 import Editor from '@/core/editor'
 import { useLayerStore } from '@/stores/layer'
 let editor: Editor | undefined;
 
 const { list: items } = useLayerStore()
 
-console.log(items, items[0], '#2')
 onMounted(() => {
-  editor = new Editor('container', { layers: [{ items}]})
+  editor = new Editor({ id: 'container', items})
 })
 
-const addShape = () => {
-  editor?.command('AddShapeCommand')
-}
+// const addShape = async () => {
+//   const item = reactive({
+//       position: {
+//         x: 400 + Math.random() * 100,
+//         y: 100 + Math.random() * 100
+//       }
+//     })
+//   await editor?.. command('AddShapeCommand', item)
+//   items.push(item)
+// }
 </script>
