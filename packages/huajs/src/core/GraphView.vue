@@ -13,7 +13,7 @@ const configCircle = ref({
   strokeWidth: 4
 })
 </script>
-<template>123
+<template>
   <v-stage :config="configKonva">
     <v-layer>
       <v-circle :config="configCircle"></v-circle>
