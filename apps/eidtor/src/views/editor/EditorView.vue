@@ -18,16 +18,16 @@ let editor: Editor | undefined;
 const { list: items } = useLayerStore()
 
 onMounted(() => {
-  editor = new Editor({ id: 'container', items})
+  editor = new Editor({ id: 'container' })
 })
 
 const addShape = async () => {
-  const item = reactive({
+  const item = {
       position: {
         x: 400 + Math.random() * 100,
         y: 100 + Math.random() * 100
       }
-    })
+    }
   await editor?.renderEngine.command('AddShapeCommand', item)
   items.push(item)
 }

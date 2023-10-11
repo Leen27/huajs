@@ -1,5 +1,5 @@
 import { Engine } from '../core/engine'
-
+import { useItemsStore } from '@huajs-core/store'
 /**
  * The Command interface declares a method for executing a command.
  */
@@ -12,23 +12,20 @@ export interface ICommandWithConsturctor {
   new(...args: any): ICommand
 }
 
-
 export class AddShapeCommand implements ICommand {
   engine: Engine
-  entity: any
-  data: object
+  declare data: Pick<ReturnType<typeof useItemsStore>, 'items'>
+  store: ReturnType<typeof useItemsStore>
 
-  constructor(engine: Engine, data: Object) {
+  constructor(engine: Engine, data: AddShapeCommand["data"]) {
     this.engine = engine
     this.data = data
+    this.store = useItemsStore()
   }
 
   public execute() {
-    // this.entity = this.engine.world.add(this.data)
-
-    // console.log(this.entity)
-
-    return Promise.resolve(this.entity)
+    this.store.items.push(this.data.item)
+    return Promise.resolve()
   }
 
   public undo() {
