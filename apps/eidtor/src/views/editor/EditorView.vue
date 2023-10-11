@@ -21,14 +21,14 @@ onMounted(() => {
   editor = new Editor({ id: 'container', items})
 })
 
-// const addShape = async () => {
-//   const item = reactive({
-//       position: {
-//         x: 400 + Math.random() * 100,
-//         y: 100 + Math.random() * 100
-//       }
-//     })
-//   await editor?.. command('AddShapeCommand', item)
-//   items.push(item)
-// }
+const addShape = async () => {
+  const item = reactive({
+      position: {
+        x: 400 + Math.random() * 100,
+        y: 100 + Math.random() * 100
+      }
+    })
+  await editor?.renderEngine.command('AddShapeCommand', item)
+  items.push(item)
+}
 </script>
