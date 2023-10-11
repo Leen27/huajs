@@ -1,24 +1,10 @@
-import type { ICommand } from "huajs-core";
-import Engine from 'huajs-core'
-import { Invoker } from "./invoker";
-
-type EditorConfigT = {
-  layers: Array<{
-    items: any[]
-  }>
-}
+import { RenderEngine, type EngineOptions } from 'huajs-core'
 
 class Editor {
-  invoker: Invoker
-  engine: Engine
+  declare renderEngine: RenderEngine
   
-  constructor(id: string, configs: EditorConfigT) {
-    this.invoker = new Invoker()
-    this.engine = new Engine({ id, layers: configs.layers })
-  }
-
-  command(commandName: string | ICommand, ...args: any) {
-    return this.invoker.execute(commandName, this.engine, ...args)
+  constructor(configs: EngineOptions) {
+    this.renderEngine = new RenderEngine(configs)
   }
 }
 

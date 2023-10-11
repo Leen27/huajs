@@ -7,6 +7,8 @@
     "@vueuse/core": "^10.4.1",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
+    "miniplex": "^2.0.0",
+    "konva": "^9.2.1",
     "vue-konva": "^3.0.2",
     "vue-router": "^4.2.4"
   },
