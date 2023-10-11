@@ -2,7 +2,7 @@ import { createApp, type App } from 'vue';
 import GraphView from './GraphView.vue'
 import VueKonva from 'vue-konva';
 import { Invoker, type ICommand } from '../command';
-import { createEventBus, EventBus } from '../eventBus'
+import { createEventBus, type EventBus } from '../eventBus'
 
 export type EngineOptions = {
   id: string
@@ -20,8 +20,9 @@ export class Engine {
     return this.invoker.execute(commandName, this, ...args)
   }
 
-  on(eventName: string, callback: (...args: any) => any ): void {
-    return
+  on(eventName: string, callback: (...args: any) => any ): EventBus {
+    this.eventBus.on(eventName, callback)
+    return this.eventBus
   }
 }
 

@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useItemsStore } from '../store'
+
 const configKonva = ref({
-  width: 200,
-  height: 200
+  width: 1000,
+  height: 1000
 })
+
+const itemStore = useItemsStore()
+
 const configCircle = ref({
-  x: 100,
-  y: 100,
   radius: 70,
   fill: "red",
   stroke: "black",
@@ -16,7 +19,7 @@ const configCircle = ref({
 <template>
   <v-stage :config="configKonva">
     <v-layer>
-      <v-circle :config="configCircle"></v-circle>
+      <v-circle v-for="item in itemStore.items" :x="item.position.x" :y="item.position.y" :config="configCircle"></v-circle>
     </v-layer>
   </v-stage>
 </template>
