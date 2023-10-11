@@ -1,74 +1,40 @@
-* 插件机制
-* 业务分离
-* ECS
-* 可观测
-* Entity
-* 测试
-
-框架无关（ui，canvas，2D，3D）
-
-数据 -> 展示 -> 交互 -> 数据...
-
-```
-实体 Entity:
-{
-    key: 唯一标识，
-    components: []
-}
-
-组件 Component:
-{
-    key: 唯一标识
-    data: {
-        ...
-    }
-}
-
-系统 System:
-{
-
-}
+UI   新建
+-------
+Data  创建实体
 
 
-定义组件:
-大小: {
-    key: 'size',
-    data: {
-        width,
-        height
-    }
-}
+UI  改变位置
+------
+Data  改变实体位置组件
 
-位置: {
-    key: 'position',
-    data: {
-        x,
-        y
-    }
-}
 
-定义物料: 方块 {
-    key: 'rect',
-    components: [大小, 位置]
-}
-```
+UI 界面       画布
 
-~~~
-UI 层 : 新建
-_______
-交互层 : 发送消息
-_______
-数据层: 新建实体 
-_______
 
-~~~
+初始化画布
 
-~~~
+点击 ui 按钮
 
-UI 层 : 拖动位置
-_______
-交互层 : 发送消息
-_______
-数据层: 查询实体 -> 改变组件数据
-_______
-~~~
+发送指令给画布
+
+画布创建实体
+
+
+
+UI <-> Editor <-> huajs
+
+
+Entity
+
+Shape
+大小组件
+位置组件
+
+圆   矩形
+
+
+saved data -> Editor() -> Hua -> RenderSystem
+
+data
+
+Store(Proxy(data)) | Editor(data) | Render Engine(data) 
