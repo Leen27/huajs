@@ -29,9 +29,8 @@ export class AddShapeCommand implements ICommand {
   }
 
   public undo() {
-    // this.engine.world.remove(this.entity)
-    // this.entity = undefined
-    // console.log(`SimpleCommand: See, I can do simple things like printing (${this.constructor.name})`)
+    const index = this.store.items.indexOf(this.item)
+    this.store.items.splice(index, 1)
     return Promise.resolve()
   }
 }
