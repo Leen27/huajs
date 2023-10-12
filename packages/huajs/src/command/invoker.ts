@@ -30,7 +30,7 @@ export class Invoker {
       command = _cmd
     }
 
-    return this._invokeExecution(command).then((value) => value)
+    return this._invokeExecution(command)
   }
 
   undo() {
@@ -57,6 +57,7 @@ export class Invoker {
   
   async _invokeExecution(command: ICommand) {
     this.lock()
+    
     try {
       const res = await command.execute()
       this.pushUndoStack(command)
@@ -66,7 +67,6 @@ export class Invoker {
       this.unlock()
       return Promise.reject(message);
     }
-
   }
 
   async _invokeUndo(command: ICommand) {

@@ -4,7 +4,7 @@
         <o-button @click="addShape">+</o-button>
         <o-button @click="undo">undo</o-button>
         <div>
-          {{ items }}
+          {{ list }}
         </div>
     </div>
     <div w-full h-screen id="container"></div>
@@ -13,13 +13,14 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
 import Editor from '@/core/editor'
-import { useLayerStore } from '@/stores/layer'
+import { useEntityStore } from '@/stores/layer'
 let editor: Editor | undefined;
 
-const { list: items } = useLayerStore()
+const { list } = useEntityStore()
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })
+  editor.renderEngine.on('item:move', (...args) => { console.log(args) })
 })
 
 const addShape = async () => {
@@ -30,7 +31,7 @@ const addShape = async () => {
       }
     }
   await editor?.renderEngine.command('AddShapeCommand', item)
-  items.push(item)
+  list.push(item)
 }
 
 const undo = async () => {

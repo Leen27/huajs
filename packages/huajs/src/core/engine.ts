@@ -14,6 +14,7 @@ export class Engine {
 
   constructor() {
     this.invoker = new Invoker()
+    this.eventBus = createEventBus()
   }
 
   command(commandName: string | ICommand, ...args: any) {
@@ -27,6 +28,10 @@ export class Engine {
   on(eventName: string, callback: (...args: any) => any ): EventBus {
     this.eventBus.on(eventName, callback)
     return this.eventBus
+  }
+
+  off(eventName: string, callback: (...args: any) => any) {
+    return this.eventBus.off(eventName, callback)
   }
 }
 
