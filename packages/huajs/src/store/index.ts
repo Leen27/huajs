@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-type ItemT = {
+export type ItemT = {
     position: {
         x: number
         y: number

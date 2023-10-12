@@ -9,7 +9,7 @@ const messages = {
 };
 
 const map = {
-  UN_IMPLEMENTATION(methodName) {
+  UN_IMPLEMENTATION(methodName: string) {
     return messages[types.UN_IMPLEMENTATION] + methodName;
   },
   NO_COMPONENT_NAME() {
@@ -20,7 +20,7 @@ const map = {
 export default {
   types,
 
-  create(type, ...args) {
+  create(type: key, ...args: any[]) {
     type = type.toLowerCase();
     const func = map[type];
 

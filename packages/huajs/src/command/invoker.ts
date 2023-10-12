@@ -1,4 +1,4 @@
-import { rejectMessages } from "@/const/rejectMessages";
+import { rejectMessages } from "./rejectMessages";
 import type { ICommand } from "./commands"
 import { creater } from './factory'
 import { isString } from 'huajs-utils'
