@@ -1,11 +1,15 @@
 enum types {
     UN_IMPLEMENTATION = 1,
-    NO_COMPONENT_NAME
+    NO_COMPONENT_NAME,
+    ISLOCK,
+    UNDO_FAILED
 }
 
 const messages = {
   [types.UN_IMPLEMENTATION]: 'Should implement a method: ',
   [types.NO_COMPONENT_NAME]: 'Should set a component name',
+  [types.ISLOCK]: '无法运行指令，因为已经锁住',
+  [types.UNDO_FAILED]: '撤销失败',
 };
 
 const map = {
@@ -20,10 +24,12 @@ const map = {
 export default {
   types,
 
-  create(type: key, ...args: any[]) {
-    type = type.toLowerCase();
+  messages,
+
+  create(type: keyof typeof map, ...rest: any) {
     const func = map[type];
 
-    return func(...args);
+    //@ts-ignore
+    return func(...rest);
   },
 };

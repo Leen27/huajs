@@ -20,6 +20,10 @@ export class Engine {
     return this.invoker.execute(commandName, this, ...args)
   }
 
+  undo() {
+    return this.invoker.undo()
+  }
+
   on(eventName: string, callback: (...args: any) => any ): EventBus {
     this.eventBus.on(eventName, callback)
     return this.eventBus

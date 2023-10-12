@@ -2,6 +2,7 @@
   <div w-full bg-light>
     <div w-100 h-10 b-black b-1 bg-white absolute z-99>
         <o-button @click="addShape">+</o-button>
+        <o-button @click="undo">undo</o-button>
         <div>
           {{ items }}
         </div>
@@ -30,5 +31,9 @@ const addShape = async () => {
     }
   await editor?.renderEngine.command('AddShapeCommand', item)
   items.push(item)
+}
+
+const undo = async () => {
+  await editor?.renderEngine.undo()
 }
 </script>
