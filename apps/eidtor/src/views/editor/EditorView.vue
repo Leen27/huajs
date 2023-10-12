@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
 import Editor from '@/core/editor'
-import { useEntityStore } from '@/stores/layer'
+import { useEntityStore } from '@/stores/entity'
 let editor: Editor | undefined;
 
 const { list } = useEntityStore()

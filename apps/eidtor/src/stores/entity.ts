@@ -1,19 +1,21 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { Model } from 'pinia-orm'
+import { Attr, Cast, Str, Uid, HasMany } from 'pinia-orm/decorators'
 
-interface IComponent {
-  id: string
-  key: string
-  name?: string
+export class Component extends Model {
+  static entity = 'component'
+
+  @Uid() declare id: string
+  @Str('') declare key: string
+  @Str('') declare entityId: string
 }
 
-interface IPositionComponents extends IComponent {
-  x: number
-  y: number
-}
+export class Entity extends Model {
+  static entity = 'entity'
 
-interface IEntity {
-  components: Array<IComponent>
+  @Uid() declare id: string
+  @HasMany(() => Component, 'entityId') declare components: Component[]
 }
 
 export const useEntityStore = defineStore('layer', () => {
