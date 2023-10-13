@@ -20,7 +20,7 @@ const configCircle = ref({
   <v-stage :config="configKonva">
     <v-layer>
       <v-circle v-for="(item, index) in itemStore.items" :key="index" :x="item.position.x" :y="item.position.y"
-        :config="configCircle"></v-circle>
+        :config="configCircle" draggable="true"></v-circle>
     </v-layer>
   </v-stage>
 </template>

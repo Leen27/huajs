@@ -13,11 +13,10 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue'
 import Editor from '@/core/editor'
-import { useEntityStore, Entity } from '@/stores/entity'
+import { Entity } from '@/stores/entity'
 import { useRepo } from 'pinia-orm';
 let editor: Editor | undefined;
 
-// const { list } = useEntityStore()
 const entityRepo = useRepo(Entity)
 const entities = computed(() => entityRepo.all())
 
@@ -28,22 +27,20 @@ onMounted(() => {
 
 const addShape = async () => {
   const item = {
-      position: {
-        x: 400 + Math.random() * 100,
-        y: 100 + Math.random() * 100
-      }
+    position: {
+      x: 500 + Math.random() * 100,
+      y: 100 + Math.random() * 100
+    },
+    size: {
+      width: 100,
+      height: 100
     }
-  // await editor?.renderEngine.command('AddShapeCommand', item)
-  const entity = entityRepo.save({
-    components: [{
-      position: {
-        x: 100 + Math.random() * 100,
-        y: 100 + Math.random() * 100
-      }
-    }]
-  })
+  }
 
-  console.log(entity)
+  const res = await editor?.renderEngine.command('AddShapeCommand', item)
+  const entity = entityRepo.save(item)
+  console.log(entity, res)
+  window.$entity = entity
 }
 
 const undo = async () => {
