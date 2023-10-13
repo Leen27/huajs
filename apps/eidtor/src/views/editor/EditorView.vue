@@ -4,19 +4,22 @@
         <o-button @click="addShape">+</o-button>
         <o-button @click="undo">undo</o-button>
         <div>
-          {{ list }}
+          {{ entities }}
         </div>
     </div>
     <div w-full h-screen id="container"></div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import Editor from '@/core/editor'
-import { useEntityStore } from '@/stores/entity'
+import { useEntityStore, Entity } from '@/stores/entity'
+import { useRepo } from 'pinia-orm';
 let editor: Editor | undefined;
 
-const { list } = useEntityStore()
+// const { list } = useEntityStore()
+const entityRepo = useRepo(Entity)
+const entities = computed(() => entityRepo.all())
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })
@@ -30,8 +33,17 @@ const addShape = async () => {
         y: 100 + Math.random() * 100
       }
     }
-  await editor?.renderEngine.command('AddShapeCommand', item)
-  list.push(item)
+  // await editor?.renderEngine.command('AddShapeCommand', item)
+  const entity = entityRepo.save({
+    components: [{
+      position: {
+        x: 100 + Math.random() * 100,
+        y: 100 + Math.random() * 100
+      }
+    }]
+  })
+
+  console.log(entity)
 }
 
 const undo = async () => {
