@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue'
 import Editor from '@/core/editor'
-import { Entity } from '@/stores/entity'
+import { Entity } from '@/models/entity'
 import { useRepo } from 'pinia-orm';
 let editor: Editor | undefined;
 
@@ -22,7 +22,9 @@ const entities = computed(() => entityRepo.all())
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })
-  editor.renderEngine.on('item:move', (...args) => { console.log(args) })
+  editor.renderEngine.on('dragend', (data: any) => {
+    entityRepo.save(data)
+  })
 })
 
 const addShape = async () => {
@@ -37,13 +39,10 @@ const addShape = async () => {
     }
   }
 
-  const res = await editor?.renderEngine.command('AddShapeCommand', item)
-  const entity = entityRepo.save(item)
-  console.log(entity, res)
-  window.$entity = entity
+  await editor?.command('AddShapeCommand', entityRepo, item)
 }
 
 const undo = async () => {
-  await editor?.renderEngine.undo()
+  await editor?.undo()
 }
 </script>

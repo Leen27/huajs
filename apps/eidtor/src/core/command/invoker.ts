@@ -1,4 +1,4 @@
-import errorMessage from "../errorMessage";
+import errorMessage from "../../../../../packages/core/src/errorMessage";
 import type { ICommand } from "./commands"
 import { creater } from './factory'
 import { isString } from 'huajs-utils'

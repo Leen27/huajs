@@ -104,12 +104,12 @@ importers:
     dependencies:
       huajs-core:
         specifier: workspace:*
-        version: link:../../packages/huajs
+        version: link:../../packages/core
       huajs-utils:
         specifier: workspace:*
         version: link:../../packages/utils
 
-  packages/huajs:
+  packages/core:
     dependencies:
       huajs-utils:
         specifier: workspace:*

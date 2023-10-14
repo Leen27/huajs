@@ -1,28 +1,27 @@
 import { createApp, type App } from 'vue';
-import GraphView from './GraphView.vue'
+import GraphView from '../canvas/GraphView.vue'
 import VueKonva from 'vue-konva';
-import { Invoker, type ICommand } from '../command';
 import { createEventBus, type EventBus } from '../eventBus'
+import { commands } from '../command'
 
 export type EngineOptions = {
   id: string
 }
 
 export class Engine {
-  declare invoker: Invoker
+  
   declare eventBus: EventBus
+  declare commands: Record<string, any>
 
   constructor() {
-    this.invoker = new Invoker()
     this.eventBus = createEventBus()
+    this.commands = []
   }
 
-  command(commandName: string | ICommand, ...args: any) {
-    return this.invoker.execute(commandName, this, ...args)
-  }
-
-  undo() {
-    return this.invoker.undo()
+  command(commandName: string, ...args: any) {
+    const cmd = this.commands[commandName]
+    cmd && cmd(...args)
+    return Promise.resolve('')
   }
 
   on(eventName: string, callback: (...args: any) => any ): EventBus {
@@ -44,12 +43,15 @@ export class RenderEngine extends Engine {
     const { id } = options
 
     this._vue_app = this.initApp(id)
+    this.commands = commands
   }
 
   initApp(id: string) {
-    const app = createApp(GraphView);
-    app.use(VueKonva);
-    app.mount(`#${id}`);
+    const app = createApp(GraphView, {
+      eventBus: this.eventBus
+    })
+    app.use(VueKonva)
+    app.mount(`#${id}`)
 
     return app
   }
