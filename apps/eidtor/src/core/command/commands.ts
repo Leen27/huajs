@@ -45,8 +45,8 @@ export class AddShapeCommand implements ICommand {
   }
 
   public undo() {
-    console.log(this.item, '@@')
     this.repo.destroy(this.item.id!)
+    this.render.command('DEL_NODE', this.item)
     return Promise.resolve()
   }
 }
