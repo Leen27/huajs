@@ -1,16 +1,8 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-
-export type NodeT = {
-    id: string
-    position: {
-        x: number
-        y: number
-    }
-}
-
+import { type ShapeT } from 'huajs-common'
 export const useNodesStore = defineStore('Nodes', () => {
-    const nodes = ref<Array<NodeT>>([])
+    const nodes = ref<Array<ShapeT>>([])
 
     return { nodes }
 })

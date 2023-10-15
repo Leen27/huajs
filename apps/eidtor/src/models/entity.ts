@@ -1,6 +1,15 @@
 import { Model } from 'pinia-orm'
 import { Num, Str, Uid, HasOne } from 'pinia-orm/decorators'
 
+export class ShapeInfoComponent extends Model {
+  static entity = 'package-component'
+
+  @Uid() declare id: string
+  @Str() declare entityId: string
+
+  @Str() declare shapeType: string
+}
+
 export class PositionComponent extends Model {
   static entity = 'position-component'
 
@@ -19,6 +28,7 @@ export class SizeComponent extends Model {
 
   @Num(0) declare width: number
   @Num(0) declare height: number
+  @Num(0) declare radius: number
 }
 
 export type ComponentT = PositionComponent | SizeComponent
@@ -27,6 +37,7 @@ export class Entity extends Model {
   static entity = 'entity'
 
   @Uid() declare id: string
+  @HasOne(() => ShapeInfoComponent, 'entityId') declare shapeInfo: ShapeInfoComponent
   @HasOne(() => PositionComponent, 'entityId') declare position: PositionComponent
   @HasOne(() => SizeComponent, 'entityId') declare size: SizeComponent
 }

@@ -1,4 +1,4 @@
-import { Engine } from '../../../common/engine'
+import { Engine, type ShapeT } from 'huajs-common'
 import { useRepo } from 'pinia-orm'
 import type Editor from '../index'
 /**
@@ -13,41 +13,27 @@ export interface ICommandWithConsturctor {
   new(...args: any): ICommand
 }
 
-type ItemT = {
-  id?: string
-  position?: {
-    id?: string
-    x: number,
-    y: number
-  }
-  size?: {
-    id?: string
-    width: number
-    height: number
-  }
-}
-
 export class AddShapeCommand implements ICommand {
   render: Engine
-  declare item: ItemT
+  declare shape: ShapeT
   repo: ReturnType<typeof useRepo>
 
-  constructor(eidtor: Editor, repo: ReturnType<typeof useRepo>, item: ItemT) {
+  constructor(eidtor: Editor, repo: ReturnType<typeof useRepo>, shape: ShapeT) {
     this.render = eidtor.renderEngine
-    this.item = item
+    this.shape =shape 
     this.repo = repo
   }
 
   public async execute() {
-    await this.render.command('ADD_NODE', this.item)
-    this.repo.save(this.item)
+    await this.render.command('ADD_NODE', this.shape)
+    this.repo.save(this.shape)
 
     return Promise.resolve()
   }
 
   public async undo() {
-    await this.render.command('DEL_NODE', this.item)
-    this.repo.destroy(this.item.id!)
+    await this.render.command('DEL_NODE', this.shape)
+    this.repo.destroy(this.shape.id!)
     
     return Promise.resolve()
   }
