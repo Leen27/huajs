@@ -2,7 +2,7 @@ import { createApp, type App } from 'vue';
 import GraphView from './canvas/GraphView.vue'
 import VueKonva from 'vue-konva';
 import { commands } from './commands'
-import { Engine, type EngineOptions } from 'huajs-core'
+import { Engine, type EngineOptions } from 'huajs-common'
 
 export class RenderEngine extends Engine {
   declare _vue_app: App

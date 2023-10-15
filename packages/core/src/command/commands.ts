@@ -1,4 +1,4 @@
-import { Engine } from '../engine'
+import { Engine } from '../../../common/engine'
 import { useRepo } from 'pinia-orm'
 import type Editor from '../index'
 /**

@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "huajs-core": "workspace:*"
+    "huajs-core": "workspace:*",
+    "tsconfig": "workspace:*",
+    "huajs-common": "workspace:*"
   }
 }

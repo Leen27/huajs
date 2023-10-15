@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "huajs-utils": "workspace:*",
-    "huajs-render": "workspace:*"
+    "huajs-render": "workspace:*",
+    "huajs-common": "workspace:*",
+    "tsconfig": "workspace:*"
   }
 }

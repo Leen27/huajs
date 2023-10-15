@@ -1,6 +1,5 @@
 import { Invoker, type ICommand } from './command'
-import { type EngineOptions } from './engine'
-export * from './engine'
+import { type EngineOptions } from 'huajs-common'
 import { RenderEngine } from 'huajs-render'
 class Editor {
   declare invoker: Invoker

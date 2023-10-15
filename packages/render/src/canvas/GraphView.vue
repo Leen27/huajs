@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import Konva from 'konva'
 import { useNodesStore, type NodeT } from '../store'
+import { type EventBus } from 'huajs-common';
 
 const props = defineProps<{eventBus: EventBus}>()
 

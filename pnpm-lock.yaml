@@ -108,21 +108,40 @@ importers:
       huajs-utils:
         specifier: workspace:*
         version: link:../../packages/utils
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
+
+  packages/common: {}
 
   packages/core:
     dependencies:
+      huajs-common:
+        specifier: workspace:*
+        version: link:../common
       huajs-render:
         specifier: workspace:*
         version: link:../render
       huajs-utils:
         specifier: workspace:*
         version: link:../utils
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
 
   packages/render:
     dependencies:
+      huajs-common:
+        specifier: workspace:*
+        version: link:../common
       huajs-core:
         specifier: workspace:*
         version: link:../core
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/tsconfig: {}
 
   packages/utils: {}
 
