@@ -1,5 +1,5 @@
 import { Model } from 'pinia-orm'
-import { Num, Str, Uid, HasOne, BelongsTo } from 'pinia-orm/decorators'
+import { Num, Str, Uid, HasOne, BelongsTo, OnDelete } from 'pinia-orm/decorators'
 
 export class ShapeInfoComponent extends Model {
   static entity = 'package-component'
@@ -37,7 +37,7 @@ export class Entity extends Model {
   static entity = 'entity'
 
   @Uid() declare id: string
-  @HasOne(() => ShapeInfoComponent, 'entityId') declare shapeInfo: ShapeInfoComponent
-  @HasOne(() => PositionComponent, 'entityId') declare position: PositionComponent
-  @HasOne(() => SizeComponent, 'entityId') declare size: SizeComponent
+  @HasOne(() => ShapeInfoComponent, 'entityId') @OnDelete('cascade') declare shapeInfo: ShapeInfoComponent
+  @HasOne(() => PositionComponent, 'entityId')  @OnDelete('cascade') declare position: PositionComponent
+  @HasOne(() => SizeComponent, 'entityId')  @OnDelete('cascade') declare size: SizeComponent
 }
