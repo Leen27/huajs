@@ -111,9 +111,18 @@ importers:
 
   packages/core:
     dependencies:
+      huajs-render:
+        specifier: workspace:*
+        version: link:../render
       huajs-utils:
         specifier: workspace:*
         version: link:../utils
+
+  packages/render:
+    dependencies:
+      huajs-core:
+        specifier: workspace:*
+        version: link:../core
 
   packages/utils: {}
 

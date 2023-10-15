@@ -12,7 +12,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted, reactive } from 'vue'
-import Editor from '@/core/editor'
+import Editor from 'huajs-core'
 import { Entity } from '@/models/entity'
 import { useRepo } from 'pinia-orm';
 let editor: Editor | undefined;
@@ -22,7 +22,7 @@ const entities = computed(() => entityRepo.all())
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })
-  editor.renderEngine.on('dragend', (data: any) => {
+  editor.on('render:dragend', (data: any) => {
     entityRepo.save(data)
   })
 })

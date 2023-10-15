@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "huajs-utils": "workspace:*"
+    "huajs-utils": "workspace:*",
+    "huajs-render": "workspace:*"
   }
 }

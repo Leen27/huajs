@@ -1,6 +1,6 @@
-import { Engine } from 'huajs-core/src/core/engine'
+import { Engine } from '../engine'
 import { useRepo } from 'pinia-orm'
-import type Editor from '../editor'
+import type Editor from '../index'
 /**
  * The Command interface declares a method for executing a command.
  */
@@ -38,15 +38,17 @@ export class AddShapeCommand implements ICommand {
     this.repo = repo
   }
 
-  public execute() {
+  public async execute() {
+    await this.render.command('ADD_NODE', this.item)
     this.repo.save(this.item)
-    this.render.command('ADD_NODE', this.item)
+
     return Promise.resolve()
   }
 
-  public undo() {
+  public async undo() {
+    await this.render.command('DEL_NODE', this.item)
     this.repo.destroy(this.item.id!)
-    this.render.command('DEL_NODE', this.item)
+    
     return Promise.resolve()
   }
 }
