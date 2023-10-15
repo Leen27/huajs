@@ -13,19 +13,25 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, reactive } from 'vue'
+import { computed, onMounted } from 'vue'
 import Editor from 'huajs-core'
-import { Entity } from '@/models/entity'
-import { useRepo } from 'pinia-orm';
+import Repos from 'huajs-repo'
 let editor: Editor | undefined;
 
-const entityRepo = useRepo(Entity)
-const entities = computed(() => entityRepo.all())
+const entityRepo = Repos.Entity()
+const posRepo = Repos.PositionComponent()
+const entities = computed(() => entityRepo.withAll().get())
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })
-  editor.on('render:dragend', (data: any) => {
-    entityRepo.save(data)
+  editor.on('render:dragend', (item: any) => {
+    posRepo.save(item.position)
+  })
+
+  setTimeout(() => {
+    posRepo.withAll().first()?.update({
+      x: 30
+    })
   })
 })
 

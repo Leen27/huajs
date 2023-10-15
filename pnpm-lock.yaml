@@ -105,6 +105,9 @@ importers:
       huajs-core:
         specifier: workspace:*
         version: link:../../packages/core
+      huajs-repo:
+        specifier: workspace:*
+        version: link:../../packages/repo
       huajs-utils:
         specifier: workspace:*
         version: link:../../packages/utils
@@ -137,6 +140,15 @@ importers:
       huajs-core:
         specifier: workspace:*
         version: link:../core
+      huajs-repo:
+        specifier: workspace:*
+        version: link:../repo
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/repo:
+    dependencies:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig

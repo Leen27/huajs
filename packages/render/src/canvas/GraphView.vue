@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import Konva from 'konva'
-import { useNodesStore } from '../store'
-import { type EventBus, type ShapeT } from 'huajs-common';
+import { type EventBus } from 'huajs-common'
+import Repos from 'huajs-repo'
 
 const props = defineProps<{eventBus: EventBus}>()
 
@@ -11,12 +11,13 @@ const configKonva = ref({
   height: 1000
 })
 
-const itemStore = useNodesStore()
+const entityRepo = Repos.Entity()
+const nodes = computed(() => entityRepo.withAll().get())
 
 const stageRef = ref<Konva.Stage | null>(null)
 const stage = computed(() => stageRef.value?.getStage())
 
-const handleEntityDragEnd = (evt: Konva.KonvaPointerEvent, item: ShapeT) => {
+const handleEntityDragEnd = (evt: Konva.KonvaPointerEvent, item: any) => {
   if (!stage.value) return
 
   const mousePos = stage.value.getPointerPosition()
@@ -30,7 +31,7 @@ const handleEntityDragEnd = (evt: Konva.KonvaPointerEvent, item: ShapeT) => {
   props.eventBus.emit(evt.type, item)
 }
 
-const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: ShapeT) => {
+const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
   if (!stage.value) return
 
   const mousePos = stage.value.getPointerPosition()
@@ -41,10 +42,14 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: ShapeT) => {
 
 </script>
 <template>
+    <div w-100 h-10 b-black b-1 bg-green absolute right-0 z-99  v-for="(item) in nodes" :key="item.id">
+    <span>x: {{ item.position.x }}</span>
+    <span>y: {{ item.position.y }}</span>
+  </div>
   <v-stage :config="configKonva" ref="stageRef">
     <v-layer>
       <template       
-        v-for="(item) in itemStore.nodes"
+        v-for="(item) in nodes"
         :key="item.id"
       >
         <v-circle

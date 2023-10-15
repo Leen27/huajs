@@ -17,6 +17,7 @@
   "dependencies": {
     "huajs-core": "workspace:*",
     "huajs-utils": "workspace:*",
+    "huajs-repo": "workspace:*",
     "tsconfig": "workspace:*"
   },
   "keywords": [],

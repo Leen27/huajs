@@ -1,0 +1,13 @@
+{
+  "name": "huajs-repo",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "tsconfig": "workspace:*"
+  }
+}

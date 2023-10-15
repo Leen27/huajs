@@ -1,13 +1,13 @@
 import { Model } from 'pinia-orm'
-import { Num, Str, Uid, HasOne } from 'pinia-orm/decorators'
+import { Num, Str, Uid, HasOne, BelongsTo } from 'pinia-orm/decorators'
 
 export class ShapeInfoComponent extends Model {
   static entity = 'package-component'
 
   @Uid() declare id: string
-  @Str() declare entityId: string
+  @Str('') declare entityId: string
 
-  @Str() declare shapeType: string
+  @Str('') declare shapeType: string
 }
 
 export class PositionComponent extends Model {

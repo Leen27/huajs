@@ -1,7 +1,7 @@
 import { createEventBus, type EventBus } from './event-bus'
 
 export type EngineOptions = {
-  id: string
+  id: string,
 }
 
 export class Engine {

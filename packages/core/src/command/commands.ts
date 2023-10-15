@@ -25,14 +25,14 @@ export class AddShapeCommand implements ICommand {
   }
 
   public async execute() {
-    await this.render.command('ADD_NODE', this.shape)
+    // await this.render.command('ADD_NODE', this.shape)
     this.repo.save(this.shape)
 
     return Promise.resolve()
   }
 
   public async undo() {
-    await this.render.command('DEL_NODE', this.shape)
+    // await this.render.command('DEL_NODE', this.shape)
     this.repo.destroy(this.shape.id!)
     
     return Promise.resolve()
