@@ -3,6 +3,7 @@
     <div w-100 h-10 b-black b-1 bg-white absolute z-99>
         <o-button @click="addShape">+</o-button>
         <o-button @click="addCircle">+ circle</o-button>
+        <o-button @click="addRect">+ rect</o-button>
         <o-button @click="undo">undo</o-button>
         <div>
           {{ entities }}
@@ -54,6 +55,24 @@ const addCircle = async () => {
     },
     size: {
       radius: 70
+    }
+  }
+
+  await editor?.command('AddShapeCommand', entityRepo, item)
+}
+
+const addRect = async () => {
+  const item = {
+    shapeInfo: {
+      shapeType: 'Rect',
+    },
+    position: {
+      x: 500 + Math.random() * 100,
+      y: 100 + Math.random() * 100 
+    },
+    size: {
+      width: 300,
+      height: 300
     }
   }
 

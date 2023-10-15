@@ -59,6 +59,19 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: ShapeT) => {
           @dragmove="handleEntityDragMove($event, item)"
           @dragend="handleEntityDragEnd($event, item)"
         />
+        <v-rect
+          v-if="item.shapeInfo?.shapeType === 'Rect'"
+          :x="item.position?.x"
+          :y="item.position?.y"
+          :width="item.size?.width"
+          :height="item.size?.height"
+          :config="{
+            fill: 'red',
+            draggable: true
+          }"
+          @dragmove="handleEntityDragMove($event, item)"
+          @dragend="handleEntityDragEnd($event, item)"
+        />
       </template>
     </v-layer>
   </v-stage>
