@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import Konva from 'konva'
 import { type EventBus } from 'huajs-common'
-import Repos from 'huajs-repo'
+import Repos, { Entity } from 'huajs-repo'
 
 const props = defineProps<{eventBus: EventBus}>()
 
@@ -40,6 +40,15 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
   props.eventBus.emit(evt.type, item)
 }
 
+const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
+  const target = evt.target
+  console.log(target, '#1')
+  const entity = target.getAttr('entity')
+  if (!entity || !(entity instanceof Entity)) return
+  console.log(entity, '#2')
+  entityRepo.where('id', entity.id).update({ isSelected: true })
+}
+
 </script>
 <template>
     <div w-100 h-10 b-black b-1 bg-green absolute right-0 z-99  v-for="(item) in nodes" :key="item.id">
@@ -47,7 +56,7 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
     <span>y: {{ item.position.y }}</span>
   </div>
   <v-stage :config="configKonva" ref="stageRef">
-    <v-layer>
+    <v-layer @click="handleLayerClick">
       <template       
         v-for="(item) in nodes"
         :key="item.id"
@@ -61,6 +70,7 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
             fill: 'red',
             draggable: true
           }"
+          :entity="item"
           @dragmove="handleEntityDragMove($event, item)"
           @dragend="handleEntityDragEnd($event, item)"
         />
@@ -74,6 +84,7 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
             fill: 'red',
             draggable: true
           }"
+          :entity="item"
           @dragmove="handleEntityDragMove($event, item)"
           @dragend="handleEntityDragEnd($event, item)"
         />

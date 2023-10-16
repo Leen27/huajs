@@ -10,6 +10,9 @@
         </div>
     </div>
     <div w-full h-screen id="container"></div>
+    <div w-100 h-screen bg-coolGray>
+
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -32,7 +35,7 @@ onMounted(() => {
     posRepo.withAll().first()?.update({
       x: 30
     })
-  })
+  }, 5000)
 })
 
 const addShape = async () => {

@@ -1,5 +1,5 @@
 import { Model } from 'pinia-orm'
-import { Num, Str, Uid, HasOne, BelongsTo } from 'pinia-orm/decorators'
+import { Num, Str, Uid, HasOne, BelongsTo, Bool } from 'pinia-orm/decorators'
 
 export class ShapeInfoComponent extends Model {
   static entity = 'package-component'
@@ -37,6 +37,7 @@ export class Entity extends Model {
   static entity = 'entity'
 
   @Uid() declare id: string
+  @Bool(false) declare isSelected: boolean
   @HasOne(() => ShapeInfoComponent, 'entityId') declare shapeInfo: ShapeInfoComponent
   @HasOne(() => PositionComponent, 'entityId') declare position: PositionComponent
   @HasOne(() => SizeComponent, 'entityId') declare size: SizeComponent
