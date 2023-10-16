@@ -10,8 +10,8 @@
         </div>
     </div>
     <div w-full h-screen id="container"></div>
-    <div w-100 h-screen bg-coolGray>
-
+    <div w-100 h-screen bg-coolGray absolute right-0 top-0>
+      {{graphicData}}
     </div>
   </div>
 </template>
@@ -21,9 +21,11 @@ import Editor from 'huajs-core'
 import Repos from 'huajs-repo'
 let editor: Editor | undefined;
 
+const graphicRepo = Repos.Graphic()
 const entityRepo = Repos.Entity()
 const posRepo = Repos.PositionComponent()
 const entities = computed(() => entityRepo.withAll().get())
+const graphicData = computed(() => graphicRepo.query().first())
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })

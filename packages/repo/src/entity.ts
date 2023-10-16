@@ -1,5 +1,5 @@
 import { Model } from 'pinia-orm'
-import { Num, Str, Uid, HasOne, BelongsTo, Bool } from 'pinia-orm/decorators'
+import { Num, Str, Uid, HasOne, Bool } from 'pinia-orm/decorators'
 
 export class ShapeInfoComponent extends Model {
   static entity = 'package-component'
