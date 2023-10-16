@@ -12,7 +12,11 @@
     <div w-full h-screen id="container"></div>
     <div w-100 h-screen bg-coolGray absolute right-0 top-0>
       {{graphicData}}
+      <div>
+      {{ entityConfig }}
     </div>
+    </div>
+   
   </div>
 </template>
 <script setup lang="ts">
@@ -26,6 +30,7 @@ const entityRepo = Repos.Entity()
 const posRepo = Repos.PositionComponent()
 const entities = computed(() => entityRepo.withAll().get())
 const graphicData = computed(() => graphicRepo.query().first())
+const entityConfig = computed(() => entityRepo.where('id', graphicData.value?.selectedEntityId).get())
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })

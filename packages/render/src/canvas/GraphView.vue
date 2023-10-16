@@ -46,7 +46,15 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
   const target = evt.target
   console.log(target, '#1')
   const entity = target.getAttr('entity')
-  if (!entity || !(entity instanceof Entity)) return
+  if (!entity || !(entity instanceof Entity)) {
+    console.log('#1')
+    GraphicRepo.save({
+      id: GraphicRepo.query().first()?.id,
+      selectedEntityId: ''
+    })
+    return
+  }
+     
   console.log(entity, '#2', GraphicRepo.query().first()?.selectedEntityId)
   GraphicRepo.save({
     id: GraphicRepo.query().first()?.id,
@@ -56,8 +64,8 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
 
 </script>
 <template>
-  <v-stage :config="configKonva" ref="stageRef">
-    <v-layer @click="handleLayerClick">
+  <v-stage :config="configKonva" ref="stageRef" @click="handleLayerClick">
+    <v-layer>
       <template       
         v-for="(item) in nodes"
         :key="item.id"
