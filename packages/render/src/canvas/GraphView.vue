@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import Konva from 'konva'
 import { type EventBus } from 'huajs-common'
-import Repos from 'huajs-repo'
+import Repos, { Entity, Graphic } from 'huajs-repo'
 
 const props = defineProps<{eventBus: EventBus}>()
 
@@ -12,6 +12,8 @@ const configKonva = ref({
 })
 
 const entityRepo = Repos.Entity()
+const GraphicRepo = Repos.Graphic()
+GraphicRepo.save({})
 const nodes = computed(() => entityRepo.withAll().get())
 
 const stageRef = ref<Konva.Stage | null>(null)
@@ -40,13 +42,29 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
   props.eventBus.emit(evt.type, item)
 }
 
+const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
+  const target = evt.target
+  console.log(target, '#1')
+  const entity = target.getAttr('entity')
+  if (!entity || !(entity instanceof Entity)) {
+    console.log('#1')
+    GraphicRepo.save({
+      id: GraphicRepo.query().first()?.id,
+      selectedEntityId: ''
+    })
+    return
+  }
+     
+  console.log(entity, '#2', GraphicRepo.query().first()?.selectedEntityId)
+  GraphicRepo.save({
+    id: GraphicRepo.query().first()?.id,
+    selectedEntityId: entity.id
+  })
+}
+
 </script>
 <template>
-    <div w-100 h-10 b-black b-1 bg-green absolute right-0 z-99  v-for="(item) in nodes" :key="item.id">
-    <span>x: {{ item.position.x }}</span>
-    <span>y: {{ item.position.y }}</span>
-  </div>
-  <v-stage :config="configKonva" ref="stageRef">
+  <v-stage :config="configKonva" ref="stageRef" @click="handleLayerClick">
     <v-layer>
       <template       
         v-for="(item) in nodes"
@@ -54,25 +72,27 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
       >
         <v-circle
           v-if="item.shapeInfo?.shapeType === 'Circle'"
-          :x="item.position?.x"
-          :y="item.position?.y"
-          :radius="item.size?.radius"
           :config="{
             fill: 'red',
-            draggable: true
+            draggable: true,
+            x: item.position?.x,
+            y: item.position?.y,
+            radius: item.size?.radius,
+            entity: item
           }"
           @dragmove="handleEntityDragMove($event, item)"
           @dragend="handleEntityDragEnd($event, item)"
         />
         <v-rect
           v-if="item.shapeInfo?.shapeType === 'Rect'"
-          :x="item.position?.x"
-          :y="item.position?.y"
-          :width="item.size?.width"
-          :height="item.size?.height"
           :config="{
             fill: 'red',
-            draggable: true
+            draggable: true,
+            x: item.position?.x,
+            y: item.position?.y,
+            width: item.size?.width,
+            height: item.size?.height,
+            entity: item
           }"
           @dragmove="handleEntityDragMove($event, item)"
           @dragend="handleEntityDragEnd($event, item)"
