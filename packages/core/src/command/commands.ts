@@ -16,10 +16,10 @@ export interface ICommandWithConsturctor {
 
 export class AddShapeCommand implements ICommand {
   render: Engine
-  declare shape: ShapeT
+  declare shape: ShapeT | ShapeT[]
   repo: ReturnType<typeof useRepo>
 
-  constructor(eidtor: Editor, repo: ReturnType<typeof useRepo>, shape: ShapeT) {
+  constructor(eidtor: Editor, repo: ReturnType<typeof useRepo>, shape: ShapeT | ShapeT[]) {
     this.render = eidtor.renderEngine
     this.shape =shape 
     this.repo = repo
@@ -34,7 +34,8 @@ export class AddShapeCommand implements ICommand {
 
   public async undo() {
     // await this.render.command('DEL_NODE', this.shape)
-    this.repo.destroy(this.shape.id!)
+    const destroyArr = Array.isArray(this.shape) ? this.shape.map(sp => sp.id).filter(sp => !!sp) : [this.shape.id]
+    this.repo.destroy(destroyArr)
     
     return Promise.resolve()
   }

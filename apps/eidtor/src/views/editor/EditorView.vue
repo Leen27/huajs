@@ -1,9 +1,11 @@
 <template>
   <div w-full bg-light>
     <div w-100 h-10 b-black b-1 bg-white absolute z-99>
+      #{{ loading }}
         <o-button @click="addShape">+</o-button>
         <o-button @click="addCircle">+ circle</o-button>
         <o-button @click="addRect">+ rect</o-button>
+        <o-button @click="create100">+ create100</o-button>
         <o-button @click="undo">undo</o-button>
         <div>
           {{ entities }}
@@ -20,7 +22,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Editor from 'huajs-core'
 import Repos from 'huajs-repo'
 let editor: Editor | undefined;
@@ -31,9 +33,34 @@ const entities = computed(() => entityRepo.withAll().get())
 const graphicData = computed(() => graphicRepo.query().first())
 const entityConfig = computed(() => entityRepo.where('id', graphicData.value?.selectedEntityId).get())
 
+const loading = ref('')
+
 onMounted(() => {
   editor = new Editor({ id: 'container' })
 })
+
+const create100 = async () => {
+  const arr = []
+  for(let i = 0; i< 1000; i++) {
+    arr.push({
+      shapeInfo: {
+        shapeType: 'Circle',
+      },
+      position: {
+        x: 500 + Math.random() * 100,
+        y: 100 + Math.random() * 100 
+      },
+      size: {
+        radius: 70
+      }
+    })
+  }
+  loading.value = 'loading'
+
+  await editor?.command('AddShapeCommand', entityRepo, arr)
+  loading.value = 'success'
+
+}
 
 const addShape = async () => {
   const item = {
