@@ -13,6 +13,7 @@
     "huajs-utils": "workspace:*",
     "huajs-render": "workspace:*",
     "huajs-common": "workspace:*",
+    "huajs-repo": "workspace:*",
     "tsconfig": "workspace:*"
   }
 }

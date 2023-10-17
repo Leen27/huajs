@@ -1,6 +1,8 @@
 import { Invoker, type ICommand } from './command'
 import { type EngineOptions } from 'huajs-common'
 import { RenderEngine } from 'huajs-render'
+import Repos from 'huajs-repo'
+
 class Editor {
   declare invoker: Invoker
   declare renderEngine: RenderEngine
@@ -8,6 +10,12 @@ class Editor {
   constructor(configs: EngineOptions) {
     this.invoker = new Invoker()
     this.renderEngine = new RenderEngine(configs)
+
+    this.on('render:dragend', (item: any) => {
+      const posRepo = Repos.PositionComponent()
+
+      this.command('ChangePositionCommand', posRepo, item.position)
+    })
   }
 
   on(type: string, callback: (...args: any[]) => any) {

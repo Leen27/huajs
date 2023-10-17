@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -125,6 +125,9 @@ importers:
       huajs-render:
         specifier: workspace:*
         version: link:../render
+      huajs-repo:
+        specifier: workspace:*
+        version: link:../repo
       huajs-utils:
         specifier: workspace:*
         version: link:../utils

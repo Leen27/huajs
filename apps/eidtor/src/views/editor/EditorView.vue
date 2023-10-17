@@ -27,22 +27,12 @@ let editor: Editor | undefined;
 
 const graphicRepo = Repos.Graphic()
 const entityRepo = Repos.Entity()
-const posRepo = Repos.PositionComponent()
 const entities = computed(() => entityRepo.withAll().get())
 const graphicData = computed(() => graphicRepo.query().first())
 const entityConfig = computed(() => entityRepo.where('id', graphicData.value?.selectedEntityId).get())
 
 onMounted(() => {
   editor = new Editor({ id: 'container' })
-  editor.on('render:dragend', (item: any) => {
-    posRepo.save(item.position)
-  })
-
-  setTimeout(() => {
-    posRepo.withAll().first()?.update({
-      x: 30
-    })
-  }, 5000)
 })
 
 const addShape = async () => {
