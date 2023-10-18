@@ -55,13 +55,17 @@ export class ChangePositionCommand implements ICommand {
   }
 
   public async execute() {
+    const now = new Date().getTime()
     const posComp: Item<PositionComponent> = this.repo.where('id', this.newPosition?.id).first()
+    const t1 = new Date().getTime()
+    console.log(t1 - now)
     if(!posComp) return
     this.oldPosition = posComp
     this.repo.save({
       ...this.newPosition
     })
-
+  const t2 = new Date().getTime()
+    console.log(t2 - now)
     return Promise.resolve()
   }
 

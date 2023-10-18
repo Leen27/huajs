@@ -45,8 +45,8 @@ const handleEntityDragMove = (evt: Konva.KonvaPointerEvent, item: any) => {
 const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
   const target = evt.target
   console.log(target, '#1')
-  const entity = target.getAttr('entity')
-  if (!entity || !(entity instanceof Entity)) {
+  const entityId = target.getAttr('entityId')
+  if (!entityId) {
     console.log('#1')
     GraphicRepo.save({
       id: GraphicRepo.query().first()?.id,
@@ -55,10 +55,10 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
     return
   }
      
-  console.log(entity, '#2', GraphicRepo.query().first()?.selectedEntityId)
+  console.log(entityId, '#2', GraphicRepo.query().first()?.selectedEntityId)
   GraphicRepo.save({
     id: GraphicRepo.query().first()?.id,
-    selectedEntityId: entity.id
+    selectedEntityId: entityId
   })
 }
 
@@ -78,7 +78,7 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
             x: item.position?.x,
             y: item.position?.y,
             radius: item.size?.radius,
-            entity: item
+            entityId: item.id
           }"
           @dragmove="handleEntityDragMove($event, item)"
           @dragend="handleEntityDragEnd($event, item)"
@@ -92,7 +92,7 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
             y: item.position?.y,
             width: item.size?.width,
             height: item.size?.height,
-            entity: item
+            entityId: item.id
           }"
           @dragmove="handleEntityDragMove($event, item)"
           @dragend="handleEntityDragEnd($event, item)"
