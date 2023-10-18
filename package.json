@@ -5,6 +5,7 @@
   "dependencies": {
     "@oruga-ui/oruga-next": "^0.7.0",
     "@vueuse/core": "^10.4.1",
+    "dexie": "^3.2.4",
     "konva": "^9.2.1",
     "mitt": "^3.0.1",
     "pinia": "^2.1.6",
