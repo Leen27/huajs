@@ -31,7 +31,7 @@ const graphicRepo = Repos.Graphic()
 const entityRepo = Repos.Entity()
 const entities = computed(() => entityRepo.withAll().get())
 const graphicData = computed(() => graphicRepo.query().first())
-const entityConfig = computed(() => entityRepo.with('position').where('id', graphicData.value?.selectedEntityId).get())
+const entityConfig = computed(() => entityRepo.where('id', graphicData.value?.selectedEntityId).get())
 
 const loading = ref('')
 
@@ -40,12 +40,10 @@ onMounted(() => {
 })
 
 const create100 = async () => {
-  const arr = []
-  for(let i = 0; i< 500; i++) {
+  const arr: any = []
+  for(let i = 0; i< 5000; i++) {
     arr.push({
-      shapeInfo: {
-        shapeType: 'Circle',
-      },
+      shapeType: 'Circle',
       position: {
         x: 500 + Math.random() * 100,
         y: 100 + Math.random() * 100 
@@ -57,7 +55,6 @@ const create100 = async () => {
   }
   loading.value = 'loading'
   setTimeout(async () => {
-    // await editor?.command('AddShapeCommand', entityRepo, arr)
     entityRepo.save(arr)
     loading.value = 'success'
   })
@@ -80,9 +77,7 @@ const addShape = async () => {
 
 const addCircle = async () => {
   const item = {
-    shapeInfo: {
-      shapeType: 'Circle',
-    },
+    shapeType: 'Circle',
     position: {
       x: 500 + Math.random() * 100,
       y: 100 + Math.random() * 100 
@@ -97,9 +92,7 @@ const addCircle = async () => {
 
 const addRect = async () => {
   const item = {
-    shapeInfo: {
-      shapeType: 'Rect',
-    },
+    shapeType: 'Rect',
     position: {
       x: 500 + Math.random() * 100,
       y: 100 + Math.random() * 100 

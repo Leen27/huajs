@@ -1,6 +1,5 @@
-import { Engine, type ShapeT } from 'huajs-common'
-import { PositionComponent } from 'huajs-repo'
-import { useRepo, type Repository, type Item } from 'pinia-orm'
+import { Engine } from 'huajs-common'
+import { useRepo, type Repository, type Item, Model } from 'pinia-orm'
 import type Editor from '../index'
 /**
  * The Command interface declares a method for executing a command.
@@ -14,26 +13,24 @@ export interface ICommandWithConsturctor {
   new(...args: any): ICommand
 }
 
-export class AddShapeCommand implements ICommand {
+export class AddShapeCommand<T extends Model> implements ICommand {
   render: Engine
-  declare shape: ShapeT | ShapeT[]
+  declare shape: T | T[]
   repo: ReturnType<typeof useRepo>
 
-  constructor(eidtor: Editor, repo: ReturnType<typeof useRepo>, shape: ShapeT | ShapeT[]) {
+  constructor(eidtor: Editor, repo: ReturnType<typeof useRepo>, shape: T | T[]) {
     this.render = eidtor.renderEngine
     this.shape =shape 
     this.repo = repo
   }
 
   public async execute() {
-    // await this.render.command('ADD_NODE', this.shape)
     this.repo.save(this.shape)
 
     return Promise.resolve()
   }
 
   public async undo() {
-    // await this.render.command('DEL_NODE', this.shape)
     const destroyArr = Array.isArray(this.shape) ? this.shape.map(sp => sp.id).filter(sp => !!sp) : [this.shape.id]
     this.repo.destroy(destroyArr)
     
@@ -41,13 +38,13 @@ export class AddShapeCommand implements ICommand {
   }
 }
 
-export class ChangePositionCommand implements ICommand {
+export class ChangePositionCommand<T extends Model> implements ICommand {
   render: Engine
-  declare newPosition: Item<PositionComponent>
-  declare oldPosition: Item<PositionComponent> | null
-  repo: Repository<PositionComponent>
+  declare newPosition: Item<T>
+  declare oldPosition: Item<T> | null
+  repo: Repository<T>
 
-  constructor(eidtor: Editor, repo: Repository<PositionComponent>, newPosition: Item<PositionComponent>) {
+  constructor(eidtor: Editor, repo: Repository<T>, newPosition: Item<T>) {
     this.render = eidtor.renderEngine
     this.newPosition = newPosition 
     this.oldPosition = null
@@ -55,17 +52,9 @@ export class ChangePositionCommand implements ICommand {
   }
 
   public async execute() {
-    const now = new Date().getTime()
-    const posComp: Item<PositionComponent> = this.repo.where('id', this.newPosition?.id).first()
-    const t1 = new Date().getTime()
-    console.log(t1 - now)
-    if(!posComp) return
-    this.oldPosition = posComp
     this.repo.save({
       ...this.newPosition
     })
-  const t2 = new Date().getTime()
-    console.log(t2 - now)
     return Promise.resolve()
   }
 

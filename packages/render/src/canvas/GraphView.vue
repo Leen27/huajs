@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import Konva from 'konva'
 import { type EventBus } from 'huajs-common'
-import Repos, { Entity, Graphic } from 'huajs-repo'
+import Repos from 'huajs-repo'
 
 const props = defineProps<{eventBus: EventBus}>()
 
@@ -55,7 +55,6 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
     return
   }
      
-  console.log(entityId, '#2', GraphicRepo.query().first()?.selectedEntityId)
   GraphicRepo.save({
     id: GraphicRepo.query().first()?.id,
     selectedEntityId: entityId
@@ -64,14 +63,14 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
 
 </script>
 <template>
-  <v-stage :config="configKonva" ref="stageRef" @click="handleLayerClick">
+  <v-stage :config="configKonva" ref="stageRef" @click="handleLayerClick" @dragstart="handleLayerClick">
     <v-layer>
       <template       
         v-for="(item) in nodes"
         :key="item.id"
       >
         <v-circle
-          v-if="item.shapeInfo?.shapeType === 'Circle'"
+          v-if="item.shapeType === 'Circle'"
           :config="{
             fill: 'red',
             draggable: true,
@@ -84,7 +83,7 @@ const handleLayerClick = (evt: Konva.KonvaPointerEvent) => {
           @dragend="handleEntityDragEnd($event, item)"
         />
         <v-rect
-          v-if="item.shapeInfo?.shapeType === 'Rect'"
+          v-if="item.shapeType === 'Rect'"
           :config="{
             fill: 'red',
             draggable: true,
