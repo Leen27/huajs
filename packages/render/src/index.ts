@@ -1,5 +1,5 @@
 import { createApp, type App } from 'vue';
-import GraphView from './canvas/GraphView.vue'
+import GraphView from './canvas'
 import VueKonva from 'vue-konva';
 import { commands } from './commands'
 import { Engine, type EngineOptions } from 'huajs-common'
