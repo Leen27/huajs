@@ -7,6 +7,7 @@
         <o-button @click="addRect">+ rect</o-button>
         <o-button @click="create100">+ create100</o-button>
         <o-button @click="undo">undo</o-button>
+        <o-button @click="save">save</o-button>
         <div>
           {{ entities }}
         </div>
@@ -108,5 +109,9 @@ const addRect = async () => {
 
 const undo = async () => {
   await editor?.undo()
+}
+
+const save = async () => {
+  await editor?.command('SaveData', entityRepo)
 }
 </script>

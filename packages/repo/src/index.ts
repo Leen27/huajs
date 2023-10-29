@@ -2,6 +2,8 @@ import { useRepo, type Model, Repository } from 'pinia-orm'
 import * as EntityRepo from './entity'
 import * as EditorRepo from './graphic'
 
+export * from './entity'
+
 const repos: Record<string, () => Repository<Model>> = {}
 
 const register = (model: Repository<Model>) => {
