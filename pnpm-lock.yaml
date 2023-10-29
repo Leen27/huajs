@@ -141,6 +141,12 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/player:
+    dependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/render:
     dependencies:
       huajs-common:
