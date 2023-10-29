@@ -1,14 +1,14 @@
+import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
-
 import UnoCSS from 'unocss/vite'
 import { presetUno, presetAttributify, presetIcons } from 'unocss'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/',
   plugins: [
     vue(),
     vueJsx(),
@@ -26,7 +26,7 @@ export default defineConfig({
           // },
         }),
       ] 
-    })
+    }),
   ],
   resolve: {
     alias: {
@@ -41,5 +41,12 @@ export default defineConfig({
         experimentalDecorators: true,
       },
    },
+  },
+  
+  build: {
+    rollupOptions: {
+      output: {
+      },
+    },
   },
 })

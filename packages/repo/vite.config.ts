@@ -1,12 +1,13 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    dts()
+    dts(),
+    splitVendorChunkPlugin()
   ],
   resolve: {
     alias: {
@@ -24,15 +25,8 @@ export default defineConfig({
       formats: ["es", "cjs", "umd", "iife"],
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
-      external: ['pinia'],
+      external: ['vue', 'pinia'],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          pinia: 'pinia'
-        },
       },
     },
   },

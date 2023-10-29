@@ -4,8 +4,6 @@ import Konva from 'konva'
 import { type EventBus } from 'huajs-common'
 import Repos from 'huajs-repo'
 
-console.log(Repos, 'Repos')
-
 export default defineComponent({
   props: ['eventBus'],
   setup(props: {eventBus: EventBus}){
@@ -14,8 +12,6 @@ export default defineComponent({
       width: 1000,
       height: 1000
     })
-
-    console.log(Repos, 'Repos')
 
     const entityRepo = Repos.entity()
     const GraphicRepo = Repos.graphic()
@@ -85,8 +81,7 @@ export default defineComponent({
                   radius: item.size?.radius,
                   entityId: item.id}
                 }
-                onDragmove={($event: any) => handleEntityDragMove($event, item)}
-                onDragend={($event: any) => handleEntityDragEnd($event, item)}
+                onDragEnd={($event: any) => handleEntityDragEnd($event, item)}
               /> :
               <v-rect
                 v-if={item.shapeType === 'Rect'}

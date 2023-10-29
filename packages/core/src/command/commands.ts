@@ -14,6 +14,7 @@ export interface ICommandWithConsturctor {
 }
 
 export class AddShapeCommand<T extends Model> implements ICommand {
+  static name = 'AddShape'
   render: Engine
   declare shape: T | T[]
   repo: ReturnType<typeof useRepo>
@@ -25,6 +26,7 @@ export class AddShapeCommand<T extends Model> implements ICommand {
   }
 
   public async execute() {
+    console.log(this.repo, this.shape, '@')
     this.repo.save(this.shape)
 
     return Promise.resolve()
@@ -39,6 +41,7 @@ export class AddShapeCommand<T extends Model> implements ICommand {
 }
 
 export class ChangePositionCommand<T extends Model> implements ICommand {
+  static name = 'ChangePosition'
   render: Engine
   declare newPosition: Item<T>
   declare oldPosition: Item<T> | null

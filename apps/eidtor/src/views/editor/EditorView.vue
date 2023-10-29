@@ -3,7 +3,7 @@
     <div w-100 h-10 b-black b-1 bg-white absolute z-99>
       #{{ loading }}
         <o-button @click="addShape">+</o-button>
-        <o-button @click="addCircle">+ circle</o-button>
+        <o-button @click="addCircle">+ circle1</o-button>
         <o-button @click="addRect">+ rect</o-button>
         <o-button @click="create100">+ create100</o-button>
         <o-button @click="undo">undo</o-button>
@@ -71,8 +71,8 @@ const addShape = async () => {
       height: 100
     }
   }
-
-  await editor?.command('AddShapeCommand', entityRepo, item)
+console.log(editor, editor?.command, '@')
+  await editor?.command('AddShape', entityRepo, item)
 }
 
 const addCircle = async () => {
@@ -86,8 +86,8 @@ const addCircle = async () => {
       radius: 70
     }
   }
-
-  await editor?.command('AddShapeCommand', entityRepo, item)
+  console.log(editor, editor?.command, '@')
+  await editor?.command('AddShape', entityRepo, item)
 }
 
 const addRect = async () => {
@@ -103,7 +103,7 @@ const addRect = async () => {
     }
   }
 
-  await editor?.command('AddShapeCommand', entityRepo, item)
+  await editor?.command('AddShape', entityRepo, item)
 }
 
 const undo = async () => {
