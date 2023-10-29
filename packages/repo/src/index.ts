@@ -1,17 +1,16 @@
 import { useRepo, type Model, Repository } from 'pinia-orm'
-import * as entityRepo from './entity'
+import * as EntityRepo from './entity'
 import * as EditorRepo from './graphic'
-export * from './entity'
-export * from './graphic'
 
 const repos: Record<string, () => Repository<Model>> = {}
 
 const register = (model: Repository<Model>) => {
-  if (!model.name) return
-  repos[model.name] = () => useRepo(model)
+  console.log(model.entity, 'm')
+  if (!model.entity) return
+  repos[model.entity] = () => useRepo(model)
 }
 
-for(const repo of [entityRepo, EditorRepo]) {
+for(const repo of [EntityRepo, EditorRepo]) {
   for(const key in repo) {
     register((repo as any)[key])
   }

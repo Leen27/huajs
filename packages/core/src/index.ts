@@ -12,7 +12,7 @@ class Editor {
     this.renderEngine = new RenderEngine(configs)
 
     this.on('render:dragend', (item: any) => {
-      const posRepo = Repos.Entity()
+      const posRepo = Repos.entity()
 
       this.command('ChangePositionCommand', posRepo, item)
     })

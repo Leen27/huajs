@@ -3,11 +3,23 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
-  "main": "src/index.ts",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/huajs-repo.cjs",
+  "module": "./dist/huajs-repo.js",
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "tsconfig": "workspace:*"
+  },
+  "scripts": {
+    "build": "run-p type-check \"build-only {@}\" --",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "type": "tsc"
   }
 }

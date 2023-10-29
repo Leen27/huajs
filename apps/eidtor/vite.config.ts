@@ -32,5 +32,14 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     }
-  }
+  },
+
+  esbuild: {
+    tsconfigRaw: {
+      compilerOptions: {
+        useDefineForClassFields: true, 
+        experimentalDecorators: true,
+      },
+   },
+  },
 })

@@ -27,8 +27,8 @@ import Editor from 'huajs-core'
 import Repos from 'huajs-repo'
 let editor: Editor | undefined;
 
-const graphicRepo = Repos.Graphic()
-const entityRepo = Repos.Entity()
+const graphicRepo = Repos.graphic()
+const entityRepo = Repos.entity()
 const entities = computed(() => entityRepo.withAll().get())
 const graphicData = computed(() => graphicRepo.query().first())
 const entityConfig = computed(() => entityRepo.where('id', graphicData.value?.selectedEntityId).get())

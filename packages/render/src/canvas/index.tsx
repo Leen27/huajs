@@ -4,6 +4,8 @@ import Konva from 'konva'
 import { type EventBus } from 'huajs-common'
 import Repos from 'huajs-repo'
 
+console.log(Repos, 'Repos')
+
 export default defineComponent({
   props: ['eventBus'],
   setup(props: {eventBus: EventBus}){
@@ -13,8 +15,10 @@ export default defineComponent({
       height: 1000
     })
 
-    const entityRepo = Repos.Entity()
-    const GraphicRepo = Repos.Graphic()
+    console.log(Repos, 'Repos')
+
+    const entityRepo = Repos.entity()
+    const GraphicRepo = Repos.graphic()
     GraphicRepo.save({})
     
     const nodes = computed(() => entityRepo.withAll().get())
