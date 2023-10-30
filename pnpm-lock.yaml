@@ -117,15 +117,15 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      zixian-utils:
+        specifier: workspace:*
+        version: link:../../packages/utils
       zixian-vue-core:
         specifier: workspace:*
         version: link:../../packages/core
       zixian-vue-repo:
         specifier: workspace:*
         version: link:../../packages/repo
-      zixian-vue-utils:
-        specifier: workspace:*
-        version: link:../../packages/utils
 
   packages/common: {}
 
@@ -134,6 +134,9 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
+      zixian-utils:
+        specifier: workspace:*
+        version: link:../utils
       zixian-vue-common:
         specifier: workspace:*
         version: link:../common
@@ -143,15 +146,15 @@ importers:
       zixian-vue-repo:
         specifier: workspace:*
         version: link:../repo
-      zixian-vue-utils:
-        specifier: workspace:*
-        version: link:../utils
 
   packages/player:
     dependencies:
       pixi.js:
         specifier: ^7.3.2
         version: 7.3.2(@pixi/utils@7.3.2)
+      zixian-utils:
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
       typescript:
         specifier: ^5.0.2

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "zixian-vue-core": "workspace:*",
-    "zixian-vue-utils": "workspace:*",
+    "zixian-utils": "workspace:*",
     "zixian-vue-repo": "workspace:*",
     "tsconfig": "workspace:*"
   },

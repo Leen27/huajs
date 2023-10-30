@@ -17,6 +17,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "pixi.js": "^7.3.2"
+    "pixi.js": "^7.3.2",
+    "zixian-utils": "workspace:*"
   }
 }

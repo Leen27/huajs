@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "zixian-vue-utils": "workspace:*",
+    "zixian-utils": "workspace:*",
     "zixian-vue-render": "workspace:*",
     "zixian-vue-common": "workspace:*",
     "zixian-vue-repo": "workspace:*",
