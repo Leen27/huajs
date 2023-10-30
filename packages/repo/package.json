@@ -1,12 +1,12 @@
 {
-  "name": "zixian-vue/repo",
+  "name": "zixian-vue-repo",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
   "type": "module",
   "files": ["dist"],
-  "main": "./dist/zixian-vue/repo.cjs",
-  "module": "./dist/zixian-vue/repo.js",
+  "main": "./dist/zixian-vue-repo.cjs",
+  "module": "./dist/zixian-vue-repo.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
@@ -15,8 +15,7 @@
     "tsconfig": "workspace:*"
   },
   "scripts": {
-    "build": "run-p type-check \"build-only {@}\" --",
-    "build-only": "vite build",
+    "build": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",

@@ -24,8 +24,8 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import Editor from 'zixian-vue/core'
-import Repos from 'zixian-vue/repo'
+import Editor from 'zixian-vue-core'
+import Repos from 'zixian-vue-repo'
 let editor: Editor | undefined;
 
 const graphicRepo = Repos.graphic()

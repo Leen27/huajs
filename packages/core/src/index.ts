@@ -1,7 +1,7 @@
 import { Invoker, type ICommand } from './command'
-import { type EngineOptions } from 'zixian-vue/common'
-import { RenderEngine } from 'zixian-vue/render'
-import Repos from 'zixian-vue/repo'
+import { type EngineOptions } from 'zixian-vue-common'
+import { RenderEngine } from 'zixian-vue-render'
+import Repos from 'zixian-vue-repo'
 
 class Editor {
   declare invoker: Invoker

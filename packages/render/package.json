@@ -1,5 +1,5 @@
 {
-  "name": "zixian-vue/render",
+  "name": "zixian-vue-render",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "zixian-vue/core": "workspace:*",
-    "zixian-vue/repo": "workspace:*",
+    "zixian-vue-core": "workspace:*",
+    "zixian-vue-repo": "workspace:*",
     "tsconfig": "workspace:*",
-    "zixian-vue/common": "workspace:*"
+    "zixian-vue-common": "workspace:*"
   }
 }

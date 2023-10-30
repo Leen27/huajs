@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@zixian-vue/core/*": ["src/*"]
+      "@zixian-vue-core/*": ["src/*"]
     },
   },
 }

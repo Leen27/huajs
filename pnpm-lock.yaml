@@ -117,13 +117,13 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../../packages/tsconfig
-      zixian-vue/core:
+      zixian-vue-core:
         specifier: workspace:*
         version: link:../../packages/core
-      zixian-vue/repo:
+      zixian-vue-repo:
         specifier: workspace:*
         version: link:../../packages/repo
-      zixian-vue/utils:
+      zixian-vue-utils:
         specifier: workspace:*
         version: link:../../packages/utils
 
@@ -147,16 +147,16 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
-      zixian-vue/common:
+      zixian-vue-common:
         specifier: workspace:*
         version: link:../common
-      zixian-vue/render:
+      zixian-vue-render:
         specifier: workspace:*
         version: link:../render
-      zixian-vue/repo:
+      zixian-vue-repo:
         specifier: workspace:*
         version: link:../repo
-      zixian-vue/utils:
+      zixian-vue-utils:
         specifier: workspace:*
         version: link:../utils
 
@@ -165,13 +165,13 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
-      zixian-vue/common:
+      zixian-vue-common:
         specifier: workspace:*
         version: link:../common
-      zixian-vue/core:
+      zixian-vue-core:
         specifier: workspace:*
         version: link:../core
-      zixian-vue/repo:
+      zixian-vue-repo:
         specifier: workspace:*
         version: link:../repo
 
