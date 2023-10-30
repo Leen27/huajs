@@ -134,12 +134,12 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
+      zixian-common:
+        specifier: workspace:*
+        version: link:../common
       zixian-utils:
         specifier: workspace:*
         version: link:../utils
-      zixian-vue-common:
-        specifier: workspace:*
-        version: link:../common
       zixian-vue-render:
         specifier: workspace:*
         version: link:../render
@@ -152,6 +152,9 @@ importers:
       pixi.js:
         specifier: ^7.3.2
         version: 7.3.2(@pixi/utils@7.3.2)
+      zixian-common:
+        specifier: workspace:*
+        version: link:../common
       zixian-utils:
         specifier: workspace:*
         version: link:../utils
@@ -168,7 +171,7 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
-      zixian-vue-common:
+      zixian-common:
         specifier: workspace:*
         version: link:../common
       zixian-vue-core:

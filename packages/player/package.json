@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "pixi.js": "^7.3.2",
-    "zixian-utils": "workspace:*"
+    "zixian-utils": "workspace:*",
+    "zixian-common": "workspace:*"
   }
 }

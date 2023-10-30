@@ -1,5 +1,5 @@
 import { Invoker, type ICommand } from './command'
-import { type EngineOptions } from 'zixian-vue-common'
+import { type EngineOptions } from 'zixian-common'
 import { RenderEngine } from 'zixian-vue-render'
 import Repos from 'zixian-vue-repo'
 

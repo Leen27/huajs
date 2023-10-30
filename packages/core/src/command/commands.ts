@@ -1,4 +1,4 @@
-import { Engine } from 'zixian-vue-common'
+import { Engine } from 'zixian-common'
 import { useRepo, type Repository, type Item, Model } from 'pinia-orm'
 import type Editor from '../index'
 import localforage from 'localforage'

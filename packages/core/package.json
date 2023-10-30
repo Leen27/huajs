@@ -12,7 +12,7 @@
   "dependencies": {
     "zixian-utils": "workspace:*",
     "zixian-vue-render": "workspace:*",
-    "zixian-vue-common": "workspace:*",
+    "zixian-common": "workspace:*",
     "zixian-vue-repo": "workspace:*",
     "tsconfig": "workspace:*"
   }

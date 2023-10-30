@@ -1,5 +1,26 @@
-import * as PIXI from 'pixi.js';
+import { Graphics, Application } from 'pixi.js';
 import { isString, assert } from 'zixian-utils'
+import { ShapeT } from 'zixian-common'
+
+export const createShape = (graphics: Graphics, config: ShapeT) => {
+    const { position, size } = config
+
+    graphics.lineStyle(0); // draw a circle, set the lineStyle to zero so the circle doesn't have an outline
+    graphics.beginFill(0xDE3249, 1);
+    graphics.drawCircle(position?.x || 0, position?.y || 0, size?.radius || 50);
+    graphics.endFill();
+}
+
+export const initEntities = (app: Application) => (entities: ShapeT[]) => {
+    const graphics = new Graphics();
+
+    entities.forEach(entity => {
+        createShape(graphics, entity)
+    })
+
+    app.stage.addChild(graphics)
+}
+
 export const createPlayer = (parent: HTMLElement | string) => {
     assert(!!parent, '请提供渲染的容器')
 
@@ -10,41 +31,13 @@ export const createPlayer = (parent: HTMLElement | string) => {
 
         parent = container
     }
-    const app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+
+    const app: Application = new Application({ background: '#1099bb', resizeTo: window });
 
     parent.appendChild(app.view as unknown as HTMLCanvasElement);
 
-    const container = new PIXI.Container();
-
-    app.stage.addChild(container);
-
-    // Create a new texture
-    const texture = PIXI.Texture.from('https://pixijs.com/assets/bunny.png');
-
-    // Create a 5x5 grid of bunnies
-    for (let i = 0; i < 25; i++)
-    {
-        const bunny = new PIXI.Sprite(texture);
-
-        bunny.anchor.set(0.5);
-        bunny.x = (i % 5) * 40;
-        bunny.y = Math.floor(i / 5) * 40;
-        container.addChild(bunny);
+    return {
+        app,
+        initEntities: initEntities(app)
     }
-
-    // Move container to the center
-    container.x = app.screen.width / 2;
-    container.y = app.screen.height / 2;
-
-    // Center bunny sprite in local container coordinates
-    container.pivot.x = container.width / 2;
-    container.pivot.y = container.height / 2;
-
-    // Listen for animate update
-    app.ticker.add((delta) =>
-    {
-        // rotate the container!
-        // use delta to create frame-independent transform
-        container.rotation -= 0.01 * delta;
-    });
 }
