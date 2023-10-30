@@ -1,7 +1,7 @@
 import errorMessage from "../errorMessage";
 import type { ICommand } from "./commands"
 import { creater } from './factory'
-import { isString } from 'huajs-utils'
+import { isString } from 'zixian-vue/utils'
 
 
 export class Invoker { 

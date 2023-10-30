@@ -15,9 +15,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "huajs-core": "workspace:*",
-    "huajs-utils": "workspace:*",
-    "huajs-repo": "workspace:*",
+    "zixian-vue/core": "workspace:*",
+    "zixian-vue/utils": "workspace:*",
+    "zixian-vue/repo": "workspace:*",
     "tsconfig": "workspace:*"
   },
   "keywords": [],

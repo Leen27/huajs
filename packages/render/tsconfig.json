@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@huajs-render/*": ["src/*"]
+      "@zixian-vue/render/*": ["src/*"]
     },
   },
 }

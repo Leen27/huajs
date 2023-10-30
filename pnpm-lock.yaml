@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -114,18 +114,18 @@ importers:
 
   apps/eidtor:
     dependencies:
-      huajs-core:
-        specifier: workspace:*
-        version: link:../../packages/core
-      huajs-repo:
-        specifier: workspace:*
-        version: link:../../packages/repo
-      huajs-utils:
-        specifier: workspace:*
-        version: link:../../packages/utils
       tsconfig:
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      zixian-vue/core:
+        specifier: workspace:*
+        version: link:../../packages/core
+      zixian-vue/repo:
+        specifier: workspace:*
+        version: link:../../packages/repo
+      zixian-vue/utils:
+        specifier: workspace:*
+        version: link:../../packages/utils
 
   apps/player:
     dependencies:
@@ -144,36 +144,36 @@ importers:
 
   packages/core:
     dependencies:
-      huajs-common:
-        specifier: workspace:*
-        version: link:../common
-      huajs-render:
-        specifier: workspace:*
-        version: link:../render
-      huajs-repo:
-        specifier: workspace:*
-        version: link:../repo
-      huajs-utils:
-        specifier: workspace:*
-        version: link:../utils
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
+      zixian-vue/common:
+        specifier: workspace:*
+        version: link:../common
+      zixian-vue/render:
+        specifier: workspace:*
+        version: link:../render
+      zixian-vue/repo:
+        specifier: workspace:*
+        version: link:../repo
+      zixian-vue/utils:
+        specifier: workspace:*
+        version: link:../utils
 
   packages/render:
     dependencies:
-      huajs-common:
-        specifier: workspace:*
-        version: link:../common
-      huajs-core:
-        specifier: workspace:*
-        version: link:../core
-      huajs-repo:
-        specifier: workspace:*
-        version: link:../repo
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
+      zixian-vue/common:
+        specifier: workspace:*
+        version: link:../common
+      zixian-vue/core:
+        specifier: workspace:*
+        version: link:../core
+      zixian-vue/repo:
+        specifier: workspace:*
+        version: link:../repo
 
   packages/repo:
     dependencies:

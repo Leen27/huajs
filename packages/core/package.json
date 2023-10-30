@@ -1,5 +1,5 @@
 {
-  "name": "huajs-core",
+  "name": "zixian-vue/core",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "huajs-utils": "workspace:*",
-    "huajs-render": "workspace:*",
-    "huajs-common": "workspace:*",
-    "huajs-repo": "workspace:*",
+    "zixian-vue/utils": "workspace:*",
+    "zixian-vue/render": "workspace:*",
+    "zixian-vue/common": "workspace:*",
+    "zixian-vue/repo": "workspace:*",
     "tsconfig": "workspace:*"
   }
 }

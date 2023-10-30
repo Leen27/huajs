@@ -1,12 +1,12 @@
 {
-  "name": "huajs-repo",
+  "name": "zixian-vue/repo",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
   "type": "module",
   "files": ["dist"],
-  "main": "./dist/huajs-repo.cjs",
-  "module": "./dist/huajs-repo.js",
+  "main": "./dist/zixian-vue/repo.cjs",
+  "module": "./dist/zixian-vue/repo.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
