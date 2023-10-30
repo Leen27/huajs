@@ -127,19 +127,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/utils
 
-  apps/player:
-    dependencies:
-      pixi.js:
-        specifier: ^7.3.2
-        version: 7.3.2(@pixi/utils@7.3.2)
-    devDependencies:
-      typescript:
-        specifier: ^5.0.2
-        version: 5.2.2
-      vite:
-        specifier: ^4.4.5
-        version: 4.4.9(@types/node@18.17.17)
-
   packages/common: {}
 
   packages/core:
@@ -159,6 +146,19 @@ importers:
       zixian-vue-utils:
         specifier: workspace:*
         version: link:../utils
+
+  packages/player:
+    dependencies:
+      pixi.js:
+        specifier: ^7.3.2
+        version: 7.3.2(@pixi/utils@7.3.2)
+    devDependencies:
+      typescript:
+        specifier: ^5.0.2
+        version: 5.2.2
+      vite:
+        specifier: ^4.4.5
+        version: 4.4.9(@types/node@18.17.17)
 
   packages/render:
     dependencies:
