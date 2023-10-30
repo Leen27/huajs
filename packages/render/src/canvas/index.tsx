@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import { computed, ref } from 'vue'
 import Konva from 'konva'
 import { type EventBus } from 'zixian-common'
-import Repos from 'zixian-vue-repo'
+import Repos from 'zixian-repo'
 
 export default defineComponent({
   props: ['eventBus'],

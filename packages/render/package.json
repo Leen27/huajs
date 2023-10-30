@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "zixian-vue-core": "workspace:*",
-    "zixian-vue-repo": "workspace:*",
+    "zixian-repo": "workspace:*",
     "tsconfig": "workspace:*",
     "zixian-common": "workspace:*"
   }

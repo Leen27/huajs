@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -117,15 +117,15 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      zixian-repo:
+        specifier: workspace:*
+        version: link:../../packages/repo
       zixian-utils:
         specifier: workspace:*
         version: link:../../packages/utils
       zixian-vue-core:
         specifier: workspace:*
         version: link:../../packages/core
-      zixian-vue-repo:
-        specifier: workspace:*
-        version: link:../../packages/repo
 
   packages/common: {}
 
@@ -137,15 +137,15 @@ importers:
       zixian-common:
         specifier: workspace:*
         version: link:../common
+      zixian-repo:
+        specifier: workspace:*
+        version: link:../repo
       zixian-utils:
         specifier: workspace:*
         version: link:../utils
       zixian-vue-render:
         specifier: workspace:*
         version: link:../render
-      zixian-vue-repo:
-        specifier: workspace:*
-        version: link:../repo
 
   packages/player:
     dependencies:
@@ -174,12 +174,12 @@ importers:
       zixian-common:
         specifier: workspace:*
         version: link:../common
+      zixian-repo:
+        specifier: workspace:*
+        version: link:../repo
       zixian-vue-core:
         specifier: workspace:*
         version: link:../core
-      zixian-vue-repo:
-        specifier: workspace:*
-        version: link:../repo
 
   packages/repo:
     dependencies:

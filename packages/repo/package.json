@@ -1,12 +1,12 @@
 {
-  "name": "zixian-vue-repo",
+  "name": "zixian-repo",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
   "type": "module",
   "files": ["dist"],
-  "main": "./dist/zixian-vue-repo.cjs",
-  "module": "./dist/zixian-vue-repo.js",
+  "main": "./dist/zixian-repo.cjs",
+  "module": "./dist/zixian-repo.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"

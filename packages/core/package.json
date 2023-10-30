@@ -13,7 +13,7 @@
     "zixian-utils": "workspace:*",
     "zixian-vue-render": "workspace:*",
     "zixian-common": "workspace:*",
-    "zixian-vue-repo": "workspace:*",
+    "zixian-repo": "workspace:*",
     "tsconfig": "workspace:*"
   }
 }

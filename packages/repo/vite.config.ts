@@ -11,7 +11,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@zixian-vue-repo': fileURLToPath(new URL('./src', import.meta.url)),
+      '@zixian-repo': fileURLToPath(new URL('./src', import.meta.url)),
     }
   },
 
@@ -21,7 +21,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'huajsRepo',
       // the proper extensions will be added
-      fileName: 'zixian-vue-repo',
+      fileName: 'zixian-repo',
       formats: ["es", "cjs", "umd", "iife"],
     },
     rollupOptions: {
